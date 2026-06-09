@@ -6,27 +6,15 @@ namespace BV411.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public string Index()
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            Products.Prds.Add(new Product(0, "Pickles", 99.99));
+            Products.Prds.Add(new Product(1, "Carrot", 69.69));
+            Products.Prds.Add(new Product(2, "Tomatoes", 9.11));
+            string products = "";
+            foreach (var line in Products.Prds)
+                products += line + "\n";
+            return products;
         }
     }
 }
