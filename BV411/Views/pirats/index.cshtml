@@ -1,0 +1,27 @@
+﻿@model List<product>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="~/css/site.css">
+
+</head>
+<body>
+    <div class="content">
+        @foreach (var cart in Model) {
+            <div class="card">
+                <button class="favourites"></button>
+                <img src="https://avatars.mds.yandex.net/i?id=32d0917f2ea866e29e21119f0abf13b93d1b5463-12421862-images-thumbs&n=13" alt="">
+                <h3>@cart.Name</h3>
+                <p>
+                    @cart.Description
+                </p>
+                <button class="take">положить в корзину</button>
+            </div>
+        }
+    </div>
+</body>
+</html>
