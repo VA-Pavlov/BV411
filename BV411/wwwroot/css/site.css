@@ -1,22 +1,245 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Шапка */
+header {
+    background-color: #121212;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 2px solid #333;
+}
+
+.search-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px 0;
+}
+
+    .search-section input {
+        width: 500px;
+        padding: 12px 15px;
+        margin-left: 180px;
+        border-radius: 10px;
+        border: 1px solid #555;
+        background-color: #2a2a2a;
+        color: white;
+        font-size: 16px;
+        outline: none;
+    }
+
+        .search-section input:focus {
+            border-color: #888;
+        }
+
+    /* Кнопка Найти */
+    .search-section button {
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #4a4a4a, #2f2f2f);
+        color: white;
+        border: 1px solid #666;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .search-section button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+/* Кнопка-логотип */
+.logo-btn {
+    text-decoration: none;
+    color: white;
+    background-color: #2d2d2d;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .logo-btn:hover {
+        background-color: #444;
+        transform: scale(1.05);
+    }
+
+/* Меню */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #d0d0d0;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+    nav a:hover {
+        color: white;
+    }
+
+/* Кнопки */
+.buttons button,
+.hero button,
+.card button {
+    background-color: #3b3b3b;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .buttons button:hover,
+    .hero button:hover,
+    .card button:hover {
+        background-color: #555;
+    }
+
+/* Главный баннер */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+}
+
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        color: #bdbdbd;
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+/* Каталог */
+main {
+    padding: 40px;
+}
+
+    main h2 {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+/* Товары */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    justify-content: center;
+    gap: 25px;
+}
+
+.card {
+    width: 250px;
+    min-height: 420px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #2a2a2a;
+    border: 1px solid #3f3f3f;
+    border-radius: 15px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #363636;
+    border: 1px solid #4a4a4a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background-color: #3a3a3a;
+    color: #ffd700;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+    .favorite:hover {
+        background-color: #4a4a4a;
+        transform: scale(1.1);
+    }
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #6b6b6b;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.card h3 {
+    margin-top: 10px;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+.card p {
+    font-size: 24px;
+    color: #d8d8d8;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.card button:last-child {
+    margin-top: auto;
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
 }
