@@ -1,0 +1,31 @@
+﻿@model List<Product>
+
+<div class="products">
+
+    @foreach (var product in Model)
+    {
+        <div class="card">
+
+            <button class="favorite">☆</button>
+
+            <div class="product-image">
+                Фото товара
+            </div>
+
+            <h3>
+                <a asp-controller="Product"
+                   asp-action="Info"
+                   asp-route-id="@product.Id"
+                   class="product-link">
+                    @product.Name
+                </a>
+            </h3>
+
+            <p>@product.Price ₽</p>
+
+            <button>Купить</button>
+
+        </div>
+    }
+
+</div>

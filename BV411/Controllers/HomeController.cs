@@ -12,7 +12,7 @@ namespace BV411.Controllers
 
             if (Id == null)
             {
-                foreach (var Product in ProductsRepos.Product)
+                foreach (var Product in ProductsRepos.product)
                 {
                     Result += Product + "\n";
                 }
@@ -20,7 +20,7 @@ namespace BV411.Controllers
                 return Result;
             }
 
-            foreach (var Product in ProductsRepos.Product)
+            foreach (var Product in ProductsRepos.product)
             {
                 if (Product.Id == Id)
                 {

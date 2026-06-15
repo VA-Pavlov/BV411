@@ -6,17 +6,6 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-
-        public Product(int Id, string Name, string Description, int Price)
-        {
-            this.Id = Id;
-            this.Name = Name;
-            this.Description = Description;
-            this.Price = Price;
-        }
-        public override string ToString()
-        {
-            return $"{Id}\n{Name} - {Price} руб.\n{Description}\n";
-        }
+        public string Linq { get; set; } = "https://localhost:7213/Product/Info/";
     }
 }
