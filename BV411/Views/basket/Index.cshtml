@@ -1,0 +1,26 @@
+﻿@model Basket
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="~/css/bascet/style.css">
+</head>
+<body>
+    <div class="content">
+        @foreach(var prod in Model.Products)
+        {
+            <p>@prod.Name</p>
+        }
+    </div>
+    <div class="prise">
+        <div>
+            <h3>Итог:</h3>
+            <h2>@Model.prise</h2>
+        </div>
+        <button>оплатить</button>
+    </div>
+</body>
+</html>
