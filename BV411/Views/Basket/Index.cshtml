@@ -1,0 +1,73 @@
+﻿@model Basket
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина товаров</title>
+    <!-- Подключаем отдельный CSS-файл -->
+    <link rel="stylesheet" href="~/css/BasketStile.css">
+</head>
+<body>
+    <div class="cart">
+        <!-- Заголовок корзины (без хедера, просто внутренний) -->
+        <div class="cart-title">
+            🛒 Корзина
+            <span>@Model.Count товара</span>
+        </div>
+
+        <!-- Список карточек товаров -->
+        <div class="cart-items">
+
+            @foreach (var product in Model.Products)
+            {
+                <div class="cart-item">
+                    <div class="item-image">
+                        <!-- SVG-заглушка вместо картинки: стилизованный значок товара -->
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="@product.Image">
+                            <rect x="8" y="12" width="32" height="24" rx="4" fill="#A0B8D4" />
+                            <circle cx="20" cy="26" r="4" fill="#F0F4FA" />
+                            <circle cx="28" cy="26" r="4" fill="#F0F4FA" />
+                            <path d="M14 18L18 22L14 26" stroke="#F0F4FA" stroke-width="2" stroke-linecap="round" />
+                            <path d="M34 18L30 22L34 26" stroke="#F0F4FA" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">@product.Name</div>
+                        <div class="item-price">@product.Prise ₽ <small>за шт.</small></div>
+                    </div>
+                    <div class="item-actions">
+                        <div class="item-quantity">
+                            <button aria-label="уменьшить">−</button>
+                            <span>1</span>
+                            <button aria-label="увеличить">+</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+        <!-- Итоговая стоимость и количество товаров -->
+        <div class="cart-summary">
+            <div class="summary-left">
+                <div class="summary-item">
+                    <span class="label">📦 Количество товаров</span>
+                    <span class="value quantity-value">@Model.Count</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">🧾 позиций</span>
+                    <span class="value" style="font-size: 18px;">!0!</span>
+                </div>
+            </div>
+            <div class="summary-right">
+                <span class="label" style="font-size: 16px; font-weight: 450; color: #2d3f62;">Итого</span>
+                <span class="total-price">@Model.Price ₽</span>
+                <span class="total-items-badge">!0! шт.</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
