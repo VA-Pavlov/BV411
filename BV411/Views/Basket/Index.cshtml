@@ -1,0 +1,75 @@
+﻿@model Basket
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="~/css/BasketSite.css">
+</head>
+<body>
+
+
+    <main>
+
+        <h2>Корзина</h2>
+
+        <div class="products">
+
+            <div class="card">
+                @foreach (var product in Model.Products)
+                {
+                    <button class="favorite active">★</button>
+
+                    <div class="product-image">
+                        Фото товара
+                        @product.Image
+                    </div>
+
+                    <h3>@product.Name</h3>
+
+                    <p>@product.Price ₽ <small> за шт.</small></p>
+                }
+            </div>
+
+        </div>
+
+        <div class="cart-summary">
+            <h3>Итого: @Model.Price ₽</h3>
+            <h3>@Model.Count шт.</h3>
+
+            <button class="checkout-btn">
+                Оформить заказ
+            </button>
+
+        </div>
+
+    </main>
+    <footer>
+        <div class="footer-content">
+
+            <div>
+                <h3>Барахолка</h3>
+                <p>Площадка для покупки и продажи товаров.</p>
+            </div>
+
+            <div>
+                <h3>Контакты</h3>
+                <p>Email: support@baraholka.ru</p>
+                <p>Телефон: +8 (800) 555-35-35</p>
+            </div>
+
+            <div>
+                <h3>Информация</h3>
+                <p>Пользовательское соглашение</p>
+                <p>Политика конфиденциальности</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Барахолка. Все права защищены.
+        </div>
+
+    </footer>
+</body>
+</html>
