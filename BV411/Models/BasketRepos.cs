@@ -2,15 +2,19 @@
 {
     public static class BasketRepos
     {
-        static private List<Basket> baskets = new List<Basket>()
-        {
-            new Basket(),
-            new Basket()
-        };
+        private static List<Basket> baskets = new();
 
         public static Basket GetBasket(int id)
         {
-            return baskets[id];
+            var basket = baskets.FirstOrDefault(b => b.Id == id);
+
+            if (basket == null)
+            {
+                basket = new Basket { Id = id };
+                baskets.Add(basket);
+            }
+
+            return basket;
         }
     }
 }

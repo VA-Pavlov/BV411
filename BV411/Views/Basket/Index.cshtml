@@ -15,21 +15,34 @@
 
         <div class="products">
 
-            <div class="card">
-                @foreach (var product in Model.Products)
-                {
-                    <button class="favorite active">★</button>
+            @foreach (var product in Model.Products)
+            {
+                <div class="card">
+
+                    <button class="favorite">☆</button>
 
                     <div class="product-image">
                         Фото товара
-                        @product.Image
                     </div>
 
-                    <h3>@product.Name</h3>
+                    <h3>
+                        <a asp-controller="Product"
+                           asp-action="Info"
+                           asp-route-id="@product.Id"
+                           class="product-link">
+                            @product.Name
+                        </a>
+                    </h3>
 
-                    <p>@product.Price ₽ <small> за шт.</small></p>
-                }
-            </div>
+                    <p>@product.Price ₽</p>
+
+                    <button class="remove-btn"
+                            onclick="location.href='/Basket/Remove?basketId=@Model.Id&id=@product.Id'">
+                        Удалить
+                    </button>
+
+                </div>
+            }
 
         </div>
 
@@ -40,13 +53,17 @@
 
             <div class="cart-buttons">
 
-                <button onclick="location.href='/Product/Index'"
-                        class="back-btn">
+                <button class="back-btn"
+                        onclick="location.href='/Product/Index'">
                     Вернуться к покупкам
                 </button>
 
                 <button class="checkout-btn">
                     Оформить заказ
+                </button>
+                <button class="clear-btn"
+                        onclick="location.href='/Basket/Clear?basketId=@Model.Id'">
+                    Очистить корзину
                 </button>
 
             </div>

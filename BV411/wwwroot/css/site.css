@@ -19,6 +19,7 @@ header {
     padding: 15px 40px;
     border-bottom: 2px solid #333;
 }
+
 .menu-btn {
     background-color: #3b3b3b;
     color: white;
@@ -163,18 +164,23 @@ main {
 }
 
 .card {
-    width: 250px;
-    min-height: 420px;
     position: relative;
+    width: 250px;
+    min-height: 430px;
     display: flex;
     flex-direction: column;
-    background-color: #2a2a2a;
+    background: linear-gradient(180deg, #2a2a2a, #242424);
     border: 1px solid #3f3f3f;
     border-radius: 15px;
     padding: 20px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
+    .card:hover {
+        transform: translateY(-6px);
+        border-color: #666;
+        box-shadow: 0 0 20px rgba(255,255,255,0.08);
+    }
 .product-image {
     width: 100%;
     height: 180px;
@@ -196,6 +202,26 @@ main {
         object-fit: cover;
     }
 
+.product-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+    .product-link:hover {
+        color: #d8d8d8;
+    }
+
+    .product-link:visited {
+        color: #ffffff;
+    }
+
+    .product-link:active {
+        color: #bdbdbd;
+    }
 .favorite {
     position: absolute;
     top: 10px;
@@ -207,11 +233,19 @@ main {
     background-color: #3a3a3a;
     color: #ffd700;
     font-size: 22px;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.3s;
+    cursor: pointer;
+    z-index: 100;
+}
+.favorite {
+    width: 35px !important;
+    height: 35px !important;
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    padding: 0 !important;
 }
 
     .favorite:hover {
@@ -219,28 +253,69 @@ main {
         transform: scale(1.1);
     }
 
-.card:hover {
-    transform: translateY(-8px);
-    border-color: #6b6b6b;
-    box-shadow: 0 0 15px rgba(255,255,255,0.1);
-}
+    .favorite.active {
+        background-color: #4a4a4a;
+        color: #ffd700;
+        text-shadow: 0 0 8px rgba(255,215,0,0.7);
+    }
 
 .card h3 {
-    margin-top: 10px;
-    margin-bottom: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    min-height: 70px;
+    display: flex;
+    align-items: flex-start;
     font-size: 22px;
+    font-weight: 600;
 }
 
 .card p {
-    font-size: 24px;
-    color: #d8d8d8;
+    font-size: 18px;
+    color: #e6e6e6;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
+.card button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4a4a4a, #323232);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .card button:hover {
+        background: linear-gradient(135deg, #5a5a5a, #404040);
+        transform: translateY(-2px);
+    }
+    .card button + button {
+        margin-top: 8px;
+    }
 
 .card button:last-child {
     margin-top: auto;
 }
+.card > button:not(.favorite) {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4a4a4a, #323232);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .card > button:not(.favorite):hover {
+        background: linear-gradient(135deg, #5a5a5a, #404040);
+        transform: translateY(-2px);
+    }
 
 /* Скроллбар */
 ::-webkit-scrollbar {
