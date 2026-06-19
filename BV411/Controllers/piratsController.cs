@@ -10,5 +10,10 @@ namespace BV411.Controllers
         {
             return View(reposi.products);
         }
+        public ActionResult add(int id)
+        {
+            BasketRip.GetBasket(0).Products.Add(reposi.products[id]);
+            return RedirectToAction("Index");
+        }
     }
 }

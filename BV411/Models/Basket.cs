@@ -6,7 +6,17 @@
         {
             Id = count++;
         }
-
+        public void deleteProd(int id)
+        {
+           for (int i = 0;i < Products.Count; i++)
+            {
+                if (Products[i].Id == id)
+                {
+                    Products.RemoveAt(i);
+                    break;
+                }
+            }
+        }
         static int count {  get; set; } = 0;
         public int Id { get; set; }
         public List<product> Products { get; set; }

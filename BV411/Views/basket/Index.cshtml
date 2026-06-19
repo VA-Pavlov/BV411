@@ -12,7 +12,9 @@
     <div class="content">
         @foreach(var prod in Model.Products)
         {
-            <p>@prod.Name</p>
+            <div class="border"></div>
+            <span class="product">@prod.Name</span>
+            <a href="https://localhost:7213/basket/delete?id=0&ip=@prod.Id"> удалить</a>
         }
     </div>
     <div class="prise">
@@ -21,6 +23,7 @@
             <h2>@Model.prise</h2>
         </div>
         <button>оплатить</button>
+        <a href="https://localhost:7213/basket/clear?id=0">очистить корзину</a>
     </div>
 </body>
 </html>

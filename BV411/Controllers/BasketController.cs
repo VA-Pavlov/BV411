@@ -10,5 +10,14 @@ namespace BV411.Controllers
         {
             return View(BasketRip.GetBasket(id));
         }
+        public IActionResult delete(int id, int ip) {
+            BasketRip.GetBasket(id).deleteProd(ip);
+            return RedirectToAction("Index", id);
+        }
+        public IActionResult clear(int id)
+        {
+            BasketRip.GetBasket(id).Products.Clear();
+            return RedirectToAction("Index", id);
+        }
     }
 }
