@@ -34,12 +34,22 @@
         </div>
 
         <div class="cart-summary">
+
             <h3>Итого: @Model.Price ₽</h3>
             <h3>@Model.Count шт.</h3>
 
-            <button class="checkout-btn">
-                Оформить заказ
-            </button>
+            <div class="cart-buttons">
+
+                <button onclick="location.href='/Product/Index'"
+                        class="back-btn">
+                    Вернуться к покупкам
+                </button>
+
+                <button class="checkout-btn">
+                    Оформить заказ
+                </button>
+
+            </div>
 
         </div>
 

@@ -19,6 +19,18 @@ header {
     padding: 15px 40px;
     border-bottom: 2px solid #333;
 }
+.menu-btn {
+    background-color: #3b3b3b;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+    .menu-btn:hover {
+        background-color: #555;
+    }
 
 .search-section {
     display: flex;

@@ -9,7 +9,11 @@
 </head>
 <body>
     <header>
-        <a href="#" class="logo-btn">Барахолка</a>
+        <a asp-controller="Product"
+           asp-action="Index"
+           class="logo-btn">
+            Барахолка
+        </a>
 
         <section class="search-section">
             <input type="text" placeholder="Поиск товаров...">
@@ -18,17 +22,26 @@
         <div class="buttons">
             <button>Каталог</button>
             <button>Избранное</button>
-            <button href="https://localhost:7213/Basket/Index">Корзина</button>
+            <button onclick="location.href='/Basket/Index'">
+                Корзина
+            </button>
             <button>Профиль</button>
         </div>
     </header>
 
-    @if (ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    @if (
+    ViewContext.RouteData.Values["controller"]?.ToString() == "Product" && ViewContext.RouteData.Values["action"]?.ToString() == "Index")
     {
         <section class="hero">
+
             <h1>Добро пожаловать на Барахолку</h1>
+
             <p>100% легально и 100% не из Escape From Tarkov</p>
-            <button>Перейти в каталог</button>
+
+            <button onclick="location.href='/Product/Index'">
+                Перейти в каталог
+            </button>
+
         </section>
     }
 
