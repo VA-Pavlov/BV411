@@ -1,4 +1,4 @@
-﻿/* styles.css — отдельный файл со всеми стилями */
+﻿/* styles.css — обновлённый дизайн кнопок */
 
 /* Базовые сбросы и шрифт */
 * {
@@ -18,7 +18,7 @@ body {
 }
 
 .cart {
-    max-width: 900px;
+    max-width: 960px;
     width: 100%;
     background: #ffffff;
     border-radius: 28px;
@@ -65,7 +65,7 @@ body {
     padding: 14px 18px 14px 14px;
     border-radius: 18px;
     border: 1px solid #eaedf2;
-    transition: background 0.15s;
+    transition: background 0.15s, border-color 0.15s;
 }
 
     .cart-item:hover {
@@ -91,14 +91,6 @@ body {
         height: 100%;
         object-fit: cover;
         display: block;
-    }
-
-    /* Заглушка, если картинка не загружена */
-    .item-image .placeholder-icon {
-        font-size: 32px;
-        line-height: 1;
-        opacity: 0.7;
-        color: #3b5a82;
     }
 
 .item-details {
@@ -132,12 +124,14 @@ body {
         margin-left: 4px;
     }
 
-/* Кнопка удалить / количество – опционально, для наглядности добавим счётчик */
+/* Блок действий товара (количество + удалить) */
 .item-actions {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .item-quantity {
@@ -163,6 +157,36 @@ body {
         line-height: 1;
     }
 
+/* === Кнопка "Удалить" — элегантная, в стиле карточки === */
+.remove-btn {
+    background: #f1f4f9;
+    border: 1px solid #dce3ed;
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5a7a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+    .remove-btn:hover {
+        background: #e8edf5;
+        border-color: #bcc8da;
+        color: #1f3a6b;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .remove-btn:active {
+        transform: scale(0.96);
+        background: #dce4ef;
+    }
+
 /* Итоговая стоимость и количество */
 .cart-summary {
     display: flex;
@@ -175,6 +199,7 @@ body {
     border-radius: 20px;
     border: 1px solid #dce4ef;
     margin-top: 6px;
+    margin-bottom: 24px;
 }
 
 .summary-left {
@@ -239,8 +264,74 @@ body {
     font-weight: 500;
 }
 
+/* === Глобальные кнопки: Купить и Очистить — изящные, с глубиной === */
+.cart-global-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 32px;
+    border-radius: 60px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+}
+
+.btn-primary {
+    background: #1f3a6b;
+    color: white;
+    box-shadow: 0 6px 16px rgba(31, 58, 107, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+    .btn-primary:hover {
+        background: #142c54;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(31, 58, 107, 0.28);
+    }
+
+    .btn-primary:active {
+        transform: scale(0.97);
+        box-shadow: 0 4px 12px rgba(31, 58, 107, 0.18);
+    }
+
+.btn-outline {
+    background: #f6f8fc;
+    color: #1f3a6b;
+    border: 1px solid #d0d9e8;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+    .btn-outline:hover {
+        background: #eef3fa;
+        border-color: #a8b8cf;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-outline:active {
+        transform: scale(0.97);
+        background: #e2eaf5;
+    }
+
 /* Адаптив */
-@media (max-width: 550px) {
+@media (max-width: 650px) {
     .cart {
         padding: 20px 14px;
     }
@@ -263,6 +354,8 @@ body {
 
     .item-actions {
         margin-left: auto;
+        width: 100%;
+        justify-content: flex-end;
     }
 
     .cart-summary {
@@ -282,4 +375,44 @@ body {
     .total-price {
         font-size: 22px;
     }
+
+    .cart-global-actions {
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 11px 24px;
+        font-size: 15px;
+        flex: 1 1 auto;
+        min-width: 140px;
+    }
 }
+
+@media (max-width: 400px) {
+    .btn {
+        min-width: 100%;
+    }
+
+    .remove-btn {
+        padding: 5px 14px;
+        font-size: 13px;
+    }
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #2d3748;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 40px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+    .nav__link.active {
+        color: #e67e22;
+        font-weight: 600;
+    }
