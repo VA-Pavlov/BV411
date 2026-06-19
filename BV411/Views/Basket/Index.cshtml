@@ -20,8 +20,10 @@
         <!-- Список карточек товаров -->
         <div class="cart-items">
 
-            @foreach (var product in Model.Products)
+           
+            @for (int i = 0; i < @Model.Products.Count; i++)
             {
+                var product =  @Model.Products[i];
                 <div class="cart-item">
                     <div class="item-image">
                         <!-- SVG-заглушка вместо картинки: стилизованный значок товара -->
@@ -43,6 +45,9 @@
                             <span>1</span>
                             <button aria-label="увеличить">+</button>
                         </div>
+                        <a href="https://localhost:7213/Basket/delete/@i" class="nav__link nav__link--highlight">
+                            <span>🗑️ Удалить</span>
+                        </a>
                     </div>
                 </div>
             }
@@ -67,6 +72,12 @@
                 <span class="total-price">@Model.Price ₽</span>
                 <span class="total-items-badge">!0! шт.</span>
             </div>
+        </div>
+        <div class="cart-global-actions">
+            <button class="nav__link">💳 Купить</button>
+            <a href="https://localhost:7213/Basket?basketId=@Model.Id" class="nav__link">
+                <span>🧹 Очистить корзину</span>
+            </a>
         </div>
     </div>
 </body>

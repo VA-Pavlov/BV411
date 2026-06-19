@@ -15,5 +15,13 @@ namespace BV411.Controllers
             Danik danik = DanyPepos.DanikList.FirstOrDefault(x => x.Id == id);
             return View(danik);
         }
+
+        public IActionResult AddToBasket(int id, int idprod)
+        {
+            Danik danik = DanyPepos.DanikList.FirstOrDefault(x => x.Id == idprod);
+            var basket = BasketRepos.GetBasket(id);
+            basket.Products.Add(danik);
+            return RedirectToAction("Index");
+        }
     }
 }

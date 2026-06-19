@@ -11,5 +11,19 @@ namespace BV411.Controllers
 
             return View(basked);
         }
+        public IActionResult Delete(int basketId,int number)
+        {
+            var basked = BasketRepos.GetBasket(basketId);
+            basked.Products.RemoveAt(number);
+
+            return RedirectToAction("Index", new { basketId = basketId });
+        }
+        public IActionResult Clear(int basketId)
+        {
+            var basked = BasketRepos.GetBasket(basketId);
+            basked.Products.Clear();
+
+            return RedirectToAction("Index", new { basketId = basketId });
+        }
     }
 }
