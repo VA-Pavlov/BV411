@@ -1,12 +1,17 @@
 ﻿@model List<Product>
-
+@{
+    var favorite = FavoriteRepos.GetFavorite();
+}
 <div class="products">
 
     @foreach (var product in Model)
     {
         <div class="card">
 
-            <button class="favorite">☆</button>
+            <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
+                    onclick="location.href='/Favorite/Toggle?id=@product.Id'">
+                @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
+            </button>
 
             <div class="product-image">
                 Фото товара

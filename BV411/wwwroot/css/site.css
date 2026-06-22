@@ -181,6 +181,15 @@ main {
         border-color: #666;
         box-shadow: 0 0 20px rgba(255,255,255,0.08);
     }
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
 .product-image {
     width: 100%;
     height: 180px;
@@ -222,6 +231,7 @@ main {
     .product-link:active {
         color: #bdbdbd;
     }
+
 .favorite {
     position: absolute;
     top: 10px;
@@ -239,6 +249,7 @@ main {
     cursor: pointer;
     z-index: 100;
 }
+
 .favorite {
     width: 35px !important;
     height: 35px !important;
@@ -275,6 +286,7 @@ main {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 .card button {
     width: 100%;
     padding: 12px;
@@ -292,13 +304,15 @@ main {
         background: linear-gradient(135deg, #5a5a5a, #404040);
         transform: translateY(-2px);
     }
+
     .card button + button {
         margin-top: 8px;
     }
 
-.card button:last-child {
-    margin-top: auto;
-}
+    .card button:last-child {
+        margin-top: auto;
+    }
+
 .card > button:not(.favorite) {
     width: 100%;
     padding: 12px;

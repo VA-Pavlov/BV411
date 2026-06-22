@@ -14,13 +14,18 @@ namespace BV411.Controllers
         {
             var basket = BasketRepos.GetBasket(basketId);
 
-            Product product = ProductsRepos.product
+            var product = ProductsRepos.product
                 .FirstOrDefault(x => x.Id == id);
 
             if (product != null)
             {
                 basket.Products.Add(product);
             }
+
+            var referer = Request.Headers["Referer"].ToString();
+
+            if (!string.IsNullOrEmpty(referer))
+                return Redirect(referer);
 
             return RedirectToAction("Index", "Product");
         }

@@ -1,5 +1,10 @@
 ﻿@model Product
+@using BV411.Models
 
+@{
+    var favorite = FavoriteRepos.GetFavorite();
+    bool isFavorite = favorite.Products.Any(x => x.Id == Model.Id);
+}
 <div class="product-page">
 
     <div class="product-photo">
@@ -8,7 +13,10 @@
 
     <div class="product-info">
 
-        <button class="product-favorite">☆</button>
+        <button class="product-favorite @(isFavorite ? "active" : "")"
+                onclick="location.href='/Favorite/Toggle?id=@Model.Id'">
+            @(isFavorite ? "★" : "☆")
+        </button>
 
         <h1>@Model.Name</h1>
 
@@ -22,7 +30,8 @@
 
         <div class="product-buttons">
 
-            <button class="buy-btn">
+            <button class="buy-btn"
+                    onclick="location.href='/Basket/Add?basketId=0&id=@Model.Id'">
                 Добавить в корзину
             </button>
 

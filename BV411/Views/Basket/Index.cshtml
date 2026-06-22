@@ -1,4 +1,9 @@
 ﻿@model Basket
+@using BV411.Models
+
+@{
+    var favorite = FavoriteRepos.GetFavorite();
+}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,7 +24,10 @@
             {
                 <div class="card">
 
-                    <button class="favorite">☆</button>
+                    <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
+                            onclick="location.href='/Favorite/Toggle?id=@product.Id'">
+                        @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
+                    </button>
 
                     <div class="product-image">
                         Фото товара
@@ -49,7 +57,7 @@
         <div class="cart-summary">
 
             <h3>Итого: @Model.Price ₽</h3>
-            <h3>@Model.Count шт.</h3>
+            <h3>Товаров: @Model.Count</h3>
 
             <div class="cart-buttons">
 
@@ -61,6 +69,7 @@
                 <button class="checkout-btn">
                     Оформить заказ
                 </button>
+
                 <button class="clear-btn"
                         onclick="location.href='/Basket/Clear?basketId=@Model.Id'">
                     Очистить корзину
