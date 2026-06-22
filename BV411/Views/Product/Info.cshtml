@@ -1,0 +1,48 @@
+﻿@model Product
+@using BV411.Models
+
+@{
+    var favorite = FavoriteRepos.GetFavorite();
+    bool isFavorite = favorite.Products.Any(x => x.Id == Model.Id);
+}
+<div class="product-page">
+
+    <div class="product-photo">
+        Фото товара
+    </div>
+
+    <div class="product-info">
+
+        <button class="product-favorite @(isFavorite ? "active" : "")"
+                onclick="location.href='/Favorite/Toggle?id=@Model.Id'">
+            @(isFavorite ? "★" : "☆")
+        </button>
+
+        <h1>@Model.Name</h1>
+
+        <p class="product-price">
+            @Model.Price ₽
+        </p>
+
+        <p class="product-description">
+            @Model.Description
+        </p>
+
+        <div class="product-buttons">
+
+            <button class="buy-btn"
+                    onclick="location.href='/Basket/Add?basketId=0&id=@Model.Id'">
+                Добавить в корзину
+            </button>
+
+            <a asp-controller="Product"
+               asp-action="Index"
+               class="back-btn">
+                Вернуться к покупкам
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

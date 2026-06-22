@@ -6,27 +6,29 @@ namespace BV411.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public string Index(int? Id)
         {
-            _logger = logger;
-        }
+            string Result = "";
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+            if (Id == null)
+            {
+                foreach (var Product in ProductsRepos.product)
+                {
+                    Result += Product + "\n";
+                }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+                return Result;
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            foreach (var Product in ProductsRepos.product)
+            {
+                if (Product.Id == Id)
+                {
+                    return Product.ToString();
+                }
+            }
+
+            return "Товар не найден";
         }
     }
 }

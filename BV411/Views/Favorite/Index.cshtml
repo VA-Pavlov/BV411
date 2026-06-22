@@ -1,0 +1,56 @@
+﻿@model Favorite
+
+<main>
+
+    <h2>Избранное</h2>
+
+    <div class="products">
+
+        @foreach (var product in Model.Products)
+        {
+            <div class="card">
+
+                <button class="favorite active"
+                        onclick="location.href='/Favorite/Toggle?id=@product.Id'">
+                    ★
+                </button>
+
+                <div class="product-image">
+                    Фото товара
+                </div>
+
+                <h3>
+                    <a asp-controller="Product"
+                       asp-action="Info"
+                       asp-route-id="@product.Id"
+                       class="product-link">
+                        @product.Name
+                    </a>
+                </h3>
+
+                <p>@product.Price ₽</p>
+
+                <button class="add-btn"
+                        onclick="location.href='/Basket/Add?basketId=0&id=@product.Id'">
+                    Добавить в корзину
+                </button>
+
+            </div>
+        }
+
+    </div>
+
+    <div class="favorite-summary">
+
+        <h3>Товаров в избранном: @Model.Count</h3>
+
+        <div class="favorite-buttons">
+            <button class="back-btn"
+                    onclick="location.href='/Product/Index'">
+                Вернуться к покупкам
+            </button>
+        </div>
+
+    </div>
+
+</main>

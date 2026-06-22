@@ -1,0 +1,111 @@
+﻿@model Basket
+@using BV411.Models
+
+@{
+    var favorite = FavoriteRepos.GetFavorite();
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="~/css/BasketSite.css">
+</head>
+<body>
+
+
+    <main>
+
+        <h2>Корзина</h2>
+
+        <div class="products">
+
+            @foreach (var product in Model.Products)
+            {
+                <div class="card">
+
+                    <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
+                            onclick="location.href='/Favorite/Toggle?id=@product.Id'">
+                        @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
+                    </button>
+
+                    <div class="product-image">
+                        Фото товара
+                    </div>
+
+                    <h3>
+                        <a asp-controller="Product"
+                           asp-action="Info"
+                           asp-route-id="@product.Id"
+                           class="product-link">
+                            @product.Name
+                        </a>
+                    </h3>
+
+                    <p>@product.Price ₽</p>
+
+                    <button class="remove-btn"
+                            onclick="location.href='/Basket/Remove?basketId=@Model.Id&id=@product.Id'">
+                        Удалить
+                    </button>
+
+                </div>
+            }
+
+        </div>
+
+        <div class="cart-summary">
+
+            <h3>Итого: @Model.Price ₽</h3>
+            <h3>Товаров: @Model.Count</h3>
+
+            <div class="cart-buttons">
+
+                <button class="back-btn"
+                        onclick="location.href='/Product/Index'">
+                    Вернуться к покупкам
+                </button>
+
+                <button class="checkout-btn">
+                    Оформить заказ
+                </button>
+
+                <button class="clear-btn"
+                        onclick="location.href='/Basket/Clear?basketId=@Model.Id'">
+                    Очистить корзину
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+    <footer>
+        <div class="footer-content">
+
+            <div>
+                <h3>Барахолка</h3>
+                <p>Площадка для покупки и продажи товаров.</p>
+            </div>
+
+            <div>
+                <h3>Контакты</h3>
+                <p>Email: support@baraholka.ru</p>
+                <p>Телефон: +8 (800) 555-35-35</p>
+            </div>
+
+            <div>
+                <h3>Информация</h3>
+                <p>Пользовательское соглашение</p>
+                <p>Политика конфиденциальности</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Барахолка. Все права защищены.
+        </div>
+
+    </footer>
+</body>
+</html>
