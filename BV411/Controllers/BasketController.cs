@@ -1,58 +1,84 @@
 ﻿using BV411.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BV411.Controllers
 {
     public class BasketController : Controller
     {
-        public IActionResult Index(int basketId)
+        private readonly AppDbContext _context;
+
+        public BasketController(AppDbContext context)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            _context = context;
+        }
+        public IActionResult Index()
+        {
+            int userId = 1;
+
+            var basket = _context.baskets
+                .Include(x => x.BasketProducts)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefault(x => x.UserId == userId);
+
             return View(basket);
         }
-        public IActionResult Add(int basketId, int id)
+        public IActionResult Add(int productId)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int userId = 1;
 
-            var product = ProductsRepos.product
-                .FirstOrDefault(x => x.Id == id);
+            var basket = _context.baskets
+                .FirstOrDefault(x => x.UserId == userId);
 
-            if (product != null)
+            if (basket == null)
             {
-                basket.Products.Add(product);
+                basket = new Basket { UserId = userId };
+                _context.baskets.Add(basket);
+                _context.SaveChanges();
             }
 
-            var referer = Request.Headers["Referer"].ToString();
+            var basketProduct = _context.BasketProducts
+                .FirstOrDefault(x =>
+                    x.BasketId == basket.Id &&
+                    x.ProductId == productId);
 
-            if (!string.IsNullOrEmpty(referer))
-                return Redirect(referer);
+            if (basketProduct == null)
+            {
+                _context.BasketProducts.Add(new BasketProduct
+                {
+                    BasketId = basket.Id,
+                    ProductId = productId,
+                    Quantity = 1
+                });
+            }
+            else
+            {
+                basketProduct.Quantity++;
+            }
 
-            return RedirectToAction("Index", "Product");
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
-        public IActionResult Remove(int basketId, int id)
+        public IActionResult Remove(int productId)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int userId = 1;
 
-            Product product = basket.Products
-                .FirstOrDefault(x => x.Id == id);
+            var basket = _context.baskets
+                .FirstOrDefault(x => x.UserId == userId);
 
-            if (product != null)
+            var item = _context.BasketProducts
+                .FirstOrDefault(x =>
+                    x.BasketId == basket.Id &&
+                    x.ProductId == productId);
+
+            if (item != null)
             {
-                basket.Products.Remove(product);
+                _context.BasketProducts.Remove(item);
+                _context.SaveChanges();
             }
 
-            return RedirectToAction("Index", new { basketId });
-        }
-        public IActionResult Clear(int basketId)
-        {
-            var basket = BasketRepos.GetBasket(basketId);
-
-            if (basket != null)
-            {
-                basket.Products.Clear();
-            }
-
-            return RedirectToAction("Index", new { basketId });
+            return RedirectToAction("Index");
         }
     }
 }

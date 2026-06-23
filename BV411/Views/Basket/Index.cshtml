@@ -20,8 +20,10 @@
 
         <div class="products">
 
-            @foreach (var product in Model.Products)
+            @foreach (var item in Model.BasketProducts)
             {
+                var product = item.Product;
+
                 <div class="card">
 
                     <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
@@ -43,6 +45,8 @@
                     </h3>
 
                     <p>@product.Price ₽</p>
+
+                    <p>Количество: @item.Quantity</p>
 
                     <button class="remove-btn"
                             onclick="location.href='/Basket/Remove?basketId=@Model.Id&id=@product.Id'">

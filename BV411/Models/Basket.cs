@@ -1,12 +1,21 @@
-﻿namespace BV411.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+namespace BV411.Models
 {
     public class Basket
     {
         public int Id { get; set; }
-        public List<Product> Products { get; set; } = new List<Product>();
-        public decimal Price => Products.Sum(x => x.Price);
-        public int Count => Products.Count;
-        static int CountId = 0;
-        public Basket() { CountId++; Id = CountId; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        public List<BasketProduct> BasketProducts { get; set; } = new();
+
+        [NotMapped]
+        public decimal Price =>
+            BasketProducts.Sum(x => x.Product.Price);
+
+        [NotMapped]
+        public int Count =>
+            BasketProducts.Count;
     }
 }
