@@ -12,6 +12,29 @@ namespace BV411.Controllers
 
             return View(basked);
         }
+        public IActionResult Lover (int basketId, int id)
+        {
+            var basked = BasketRepos.GetBasket(basketId);
+            var basketProdukt = basked.Products
+                .FirstOrDefault(pr => pr.Product.Id == id);
+            if(basketProdukt != null)
+            {
+                basketProdukt.Count--;
+            }
+
+            return RedirectToAction("Index", new { basketId = basketId });
+        }
+        public IActionResult Upper(int basketId, int id)
+        {
+            var basked = BasketRepos.GetBasket(basketId);
+            var basketProdukt = basked.Products
+                 .FirstOrDefault(pr => pr.Product.Id == basketId);
+            if (basketProdukt != null)
+            {
+                basketProdukt.Count++;
+            }
+            return RedirectToAction("Index", new { basketId = basketId });
+        }
         public IActionResult Delete(int basketId,int number)
         {
             var basked = BasketRepos.GetBasket(basketId);
