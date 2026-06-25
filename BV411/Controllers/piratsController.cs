@@ -8,7 +8,7 @@ namespace BV411.Controllers
     {
         public ActionResult Index()
         {
-            return View(reposi.products);
+            return View(DataBase.DATABASEEntities.getContext().Products);
         }
         public ActionResult add(int id)
         {
