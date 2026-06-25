@@ -26,7 +26,7 @@
                 </a>
             </h3>
 
-            <p>@product.Price ₽</p>
+            <p>@product.Price.ToString("N0") ₽</p>
 
             <button onclick="location.href='/Basket/Add/@product.Id'">
                 Добавить в корзину

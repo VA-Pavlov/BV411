@@ -33,7 +33,15 @@ namespace BV411.Controllers
         {
             var basket = BasketRepos.GetBasket(basketId);
 
-            Product product = basket.Products
+            basket.Products.RemoveAll(x => x.Id == id);
+
+            return RedirectToAction("Index", new { basketId });
+        }
+        public IActionResult Minus(int basketId, int id)
+        {
+            var basket = BasketRepos.GetBasket(basketId);
+
+            var product = basket.Products
                 .FirstOrDefault(x => x.Id == id);
 
             if (product != null)

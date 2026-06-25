@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-namespace BV411.Models
+﻿namespace BV411.Models
 {
     public static class ProductsRepos
     {

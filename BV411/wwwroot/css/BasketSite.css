@@ -151,8 +151,8 @@ main {
 }
 
 .card {
-    width: 250px;
-    min-height: 420px;
+    width: 300px;
+    min-height: 520px;
     position: relative;
     display: flex;
     flex-direction: column;
