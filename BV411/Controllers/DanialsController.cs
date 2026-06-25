@@ -7,20 +7,20 @@ namespace BV411.Controllers
     {
         public IActionResult Index()
         {
-            return View(DanyPepos.DanikList);
+            return View(DanyPepos.ProductList);
         }
 
         public IActionResult Info(int id)
         {
-            Danik danik = DanyPepos.DanikList.FirstOrDefault(x => x.Id == id);
-            return View(danik);
+            Product Product = DanyPepos.ProductList.FirstOrDefault(x => x.Id == id);
+            return View(Product);
         }
 
         public IActionResult AddToBasket(int id, int idprod)
         {
-            Danik danik = DanyPepos.DanikList.FirstOrDefault(x => x.Id == idprod);
+            Product Product = DanyPepos.ProductList.FirstOrDefault(x => x.Id == idprod);
             var basket = BasketRepos.GetBasket(id);
-            basket.Products.Add(danik);
+            basket.AddProduct(Product);
             return RedirectToAction("Index");
         }
     }
