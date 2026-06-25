@@ -12,7 +12,7 @@ namespace BV411.Controllers
         }
         public ActionResult add(int id)
         {
-            BasketRip.GetBasket(0).Products.Add(reposi.products[id]);
+            BasketRip.GetBasket(0).addProduct(reposi.products[id]);
             return RedirectToAction("Index");
         }
     }

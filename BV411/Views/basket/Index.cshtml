@@ -13,8 +13,9 @@
         @foreach(var prod in Model.Products)
         {
             <div class="border"></div>
-            <span class="product">@prod.Name</span>
-            <a href="https://localhost:7213/basket/delete?id=0&ip=@prod.Id"> удалить</a>
+            <span class="product">@prod.product.Name</span>
+            <a href="https://localhost:7213/basket/delete?id=0&ip=@prod.product.Id"> удалить</a>
+            <p>@prod.count</p>
         }
     </div>
     <div class="prise">

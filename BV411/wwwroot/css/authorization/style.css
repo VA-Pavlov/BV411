@@ -1,0 +1,22 @@
+﻿
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 30px;
+}
+
+.registration {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #00000050;
+    border-radius: 12px;
+}
+
+    .registration input {
+        background: #c7e2cb;
+        border-color: #00000000;
+        border-radius: 3px;
+    }

@@ -9,22 +9,25 @@
         public void deleteProd(int id)
         {
            for (int i = 0;i < Products.Count; i++)
-            {
-                if (Products[i].Id == id)
+           {
+                if (Products[i].product.Id == id)
                 {
-                    Products.RemoveAt(i);
+                    Products[i].count--;
+                    if(Products[i].count <= 0)
+                        Products.RemoveAt(i);
                     break;
                 }
-            }
+           }
+           
         }
         static int count {  get; set; } = 0;
         public int Id { get; set; }
-        public List<product> Products { get; set; }
+        public List<basketProducts> Products { get; set; }
         public int Count { get {
                 return Products.Count;
             }
         }
-        public int prise
+        public double prise
         {
             get
             {
@@ -32,5 +35,22 @@
             }
         }
         public int IdUser { get; set; }
+        public void addProduct(product product)
+        {
+            bool flag = true;
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].product.Id == product.Id)
+                {
+                    flag = false;
+                    Products[i].count++;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                Products.Add(new basketProducts(product));
+            }
+        }
     }
 }
