@@ -6,8 +6,9 @@
 
     <div class="products">
 
-        @foreach (var product in Model.Products)
+        @foreach (var item in Model.FavoriteProducts)
         {
+            var product = item.Product;
             <div class="card">
 
                 <button class="favorite active"

@@ -1,8 +1,9 @@
 ﻿@model Basket
 @using BV411.Models
-
 @{
-    var favorite = FavoriteRepos.GetFavorite();
+    var favoriteProductIds = Model.User?.Favorite?.FavoriteProducts?
+        .Select(x => x.ProductId)
+        .ToList() ?? new List<int>();
 }
 <!DOCTYPE html>
 <html lang="ru">
@@ -26,9 +27,9 @@
 
                 <div class="card">
 
-                    <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
+                    <button class="favorite @(favoriteProductIds.Contains(product.Id) ? "active" : "")"
                             onclick="location.href='/Favorite/Toggle?id=@product.Id'">
-                        @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
+                        @(favoriteProductIds.Contains(product.Id) ? "★" : "☆")
                     </button>
 
                     <div class="product-image">

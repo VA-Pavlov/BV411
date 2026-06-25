@@ -18,7 +18,10 @@ namespace BV411.Controllers
 
             var basket = _context.baskets
                 .Include(x => x.BasketProducts)
-                .ThenInclude(x => x.Product)
+                    .ThenInclude(x => x.Product)
+                .Include(x => x.User)
+                    .ThenInclude(x => x.Favorite)
+                        .ThenInclude(x => x.FavoriteProducts)
                 .FirstOrDefault(x => x.UserId == userId);
 
             return View(basket);

@@ -1,10 +1,17 @@
-﻿using BV411.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class Favorite
+namespace BV411.Models
 {
-    public int Id { get; set; }
+    public class Favorite
+    {
+        public int Id { get; set; }
 
-    public List<Product> Products { get; set; } = new();
+        public int UserId { get; set; }
 
-    public int Count => Products.Count;
+        public User User { get; set; }
+
+        public List<FavoriteProduct> FavoriteProducts { get; set; } = new();
+        [NotMapped]
+        public int Count => FavoriteProducts.Count;
+    }
 }

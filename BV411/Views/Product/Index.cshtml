@@ -1,6 +1,6 @@
 ﻿@model List<Product>
 @{
-    var favorite = FavoriteRepos.GetFavorite();
+    var favoriteIds = ViewBag.FavoriteIds as List<int> ?? new();
 }
 <div class="products">
 
@@ -8,9 +8,9 @@
     {
         <div class="card">
 
-            <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
+            <button class="favorite @(favoriteIds.Contains(product.Id) ? "active" : "")"
                     onclick="location.href='/Favorite/Toggle?id=@product.Id'">
-                @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
+                @(favoriteIds.Contains(product.Id) ? "★" : "☆")
             </button>
 
             <div class="product-image">

@@ -33,12 +33,14 @@ namespace BV411.Models
             modelBuilder.Entity<FavoriteProduct>()
                 .HasKey(x => new { x.FavoriteId, x.ProductId });
 
-            modelBuilder.Entity<BasketProduct>()
-                .HasKey(x => new { x.BasketId, x.ProductId });
-
             modelBuilder.Entity<OrderProduct>()
                 .HasKey(x => new { x.OrderId, x.ProductId });
+
             modelBuilder.Entity<Basket>()
+                .HasIndex(x => x.UserId)
+                .IsUnique();
+
+            modelBuilder.Entity<Favorite>()
                 .HasIndex(x => x.UserId)
                 .IsUnique();
 

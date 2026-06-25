@@ -2,8 +2,7 @@
 @using BV411.Models
 
 @{
-    var favorite = FavoriteRepos.GetFavorite();
-    bool isFavorite = favorite.Products.Any(x => x.Id == Model.Id);
+    bool isFavorite = ViewBag.IsFavorite ?? false;
 }
 <div class="product-page">
 
