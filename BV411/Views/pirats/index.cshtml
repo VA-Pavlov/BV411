@@ -1,4 +1,5 @@
-﻿@model List<product>
+﻿@using BV411.Models.transport
+@model HomeTransport
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,15 +12,21 @@
 </head>
 <body>
     <div class="content">
-        @foreach (var cart in Model) {
+        @foreach (var cart in Model.Products) {
             <div class="card">
                 <button class="favourites"></button>
-                <img src="https://avatars.mds.yandex.net/i?id=32d0917f2ea866e29e21119f0abf13b93d1b5463-12421862-images-thumbs&n=13" alt="">
+                <img src="@cart.limq" alt="">
                 <h3>@cart.Name</h3>
                 <p>
                     @cart.Description
                 </p>
-                <a class="take" href="https://localhost:7213/pirats/add/@cart.Id">добавить</a>
+                @if(Model.User == null)
+                {
+                    <a class="take" href="https://localhost:7213/authorization/index">добавить</a>
+                }
+                @if(Model.User != null){
+                    <a class="take" href="https://localhost:7213/pirats/add/@cart.Id">добавить</a>
+                }
             </div>
         }
     </div>

@@ -1,4 +1,4 @@
-﻿namespace BV411.Models
+﻿namespace BV411.Models.main
 {
     public class product
     {
@@ -7,5 +7,6 @@
         public string Description { get; set; }
         public bool favor = false;
         public int price {  get; set; }
+        public string limq { get; set; }
     }
 }

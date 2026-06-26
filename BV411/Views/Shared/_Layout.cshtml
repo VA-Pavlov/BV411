@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using BV411.Models.rip
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,10 +16,25 @@
         <h1>POLKA</h1>
         <div>
             <a href="https://localhost:7213/">главная</a>
-            <a href="https://localhost:7213/basket/index/0">корзина</a>
+            @if (UserRip.ActivUser != null)
+            {
+                <a href="https://localhost:7213/basket/index/@UserRip.ActivUser.Basket.Id">корзина</a>
+            }
+            @if (UserRip.ActivUser == null)
+            {
+                <a href="https://localhost:7213/authorization/index">корзина</a>
+            }
+
             <a href="">избраное</a>
-            <a href="">аккаунт</a>
-            <img src="https://yt3.googleusercontent.com/1qo08AhHQ3QHPNXcsukq679I5HWZp4IZQkvqK-r3AahOOWvFmEAFBCWKYd3F2JjSkTKWoDQv-g=s900-c-k-c0x00ffffff-no-rj" alt="">
+            @if (UserRip.ActivUser == null)
+            {
+                <a href="https://localhost:7213/authorization/index">аккаунт</a>
+            }
+            @if (UserRip.ActivUser != null)
+            {
+                <a href="https://localhost:7213/account/index/@UserRip.ActivUser.Basket.Id">аккаунт</a>
+            }
+            <img src="https://avatars.mds.yandex.net/i?id=32d0917f2ea866e29e21119f0abf13b93d1b5463-12421862-images-thumbs&n=13" alt="">
 
         </div>
     </header>

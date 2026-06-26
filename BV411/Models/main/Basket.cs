@@ -1,4 +1,6 @@
-﻿namespace BV411.Models
+﻿using BV411.Models.transport;
+
+namespace BV411.Models.main
 {
     public class Basket
     {
@@ -22,7 +24,7 @@
         }
         static int count {  get; set; } = 0;
         public int Id { get; set; }
-        public List<basketProducts> Products { get; set; }
+        public List<basketProducts> Products { get; set; } = new List<basketProducts>();
         public int Count { get {
                 return Products.Count;
             }

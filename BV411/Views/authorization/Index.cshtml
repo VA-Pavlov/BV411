@@ -1,4 +1,4 @@
-﻿
+﻿@model bool
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +10,14 @@
 </head>
 <body>
     <div class="content">
-        <div class="registration">
-            <h2>автризация</h2>
+        <form class="registration" method="post">
+            <h2>авторизация</h2>
             <p>введите логин</p>
-            <input type="text">
+            <input type="text" name="login">
             <p>введите пароль</p>
-            <input type="text">
-        </div>
+            <input type="text" name="pas">
+            <input type="submit" value="Отправить" />
+        </form>
     </div>
 </body>
 </html>

@@ -1,0 +1,21 @@
+﻿@using BV411.Models.main
+@using BV411.Models.rip
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="~/css/account/style.css">
+
+</head>
+<body>
+    <div class="content">
+        <p class="prise"><b>@Model.money$</b></p>
+        <a class="favourites">избраное</a>
+        <a class="corsina" href="https://localhost:7213/basket/index/@UserRip.ActivUser.Basket.Id">корзина</a>
+    </div>
+</body>
+</html>

@@ -1,4 +1,6 @@
-﻿namespace BV411.Models
+﻿using BV411.Models.main;
+
+namespace BV411.Models.transport
 {
     public class basketProducts
     {

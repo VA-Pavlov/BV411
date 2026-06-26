@@ -1,4 +1,4 @@
-﻿using BV411.Models;
+﻿using BV411.Models.rip;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +8,7 @@ namespace BV411.Controllers
     {
         public IActionResult index(int id)
         {
-            return View(BasketRip.GetBasket(id));
+            return View(UserRip.ActivUser.Basket);
         }
         public IActionResult delete(int id, int ip) {
             BasketRip.GetBasket(id).deleteProd(ip);
