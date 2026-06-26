@@ -13,7 +13,7 @@ namespace BV411.Controllers {
             var basketProduct=basked.Products.FirstOrDefault(pr=>pr.Product.Id==Id);
             if (basketProduct != null) { basketProduct.Count--; }
             if (basketProduct.Count==0) { basked.Products.Remove(basketProduct);}
-            return RedirectToAction("Index", new { basketId = UserId });
+            return RedirectToAction("Index", new { basketId = UserId }); 
          }
         public IActionResult Delete(int UserId, int number) {
             var user = UsersRepos.Users.FirstOrDefault(user => user.Id == UserId);
