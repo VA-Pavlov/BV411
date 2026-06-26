@@ -1,6 +1,15 @@
-﻿@model List<Product>
+﻿@using Microsoft.AspNetCore.Http
+@using BV411.Models
+
 @{
-    var favorite = FavoriteRepos.GetFavorite();
+    int? userId = Context.Session.GetInt32("UserId");
+
+    Favorite favorite = new Favorite();
+
+    if (userId != null)
+    {
+        favorite = FavoriteRepos.GetFavorite(userId.Value);
+    }
 }
 <div class="products">
 
@@ -8,10 +17,22 @@
     {
         <div class="card">
 
-            <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
-                    onclick="location.href='/Favorite/Toggle?id=@product.Id'">
-                @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
-            </button>
+            @if (userId == null)
+            {
+                <button class="favorite"
+                        onclick="location.href='/Account/Auth'">
+                    ☆
+                </button>
+            }
+            else
+            {
+                bool isFavorite = favorite.Products.Any(x => x.Id == product.Id);
+
+                <button class="favorite @(isFavorite ? "active" : "")"
+                        onclick="location.href='/Favorite/Toggle?id=@product.Id'">
+                    @(isFavorite ? "★" : "☆")
+                </button>
+            }
 
             <div class="product-image">
                 Фото товара

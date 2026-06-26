@@ -1,10 +1,11 @@
-﻿using BV411.Models;
-
-public class Favorite
+﻿namespace BV411.Models
 {
-    public int Id { get; set; }
+    public class Favorite
+    {
+        public int Id { get; set; }
 
-    public List<Product> Products { get; set; } = new();
+        public List<Product> Products { get; set; } = new();
 
-    public int Count => Products.Count;
+        public int Count => Products.Count;
+    }
 }

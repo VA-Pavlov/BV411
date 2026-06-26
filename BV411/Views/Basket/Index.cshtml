@@ -1,8 +1,16 @@
 ﻿@model Basket
+@using Microsoft.AspNetCore.Http
 @using BV411.Models
-
+<link rel="stylesheet" href="~/css/BasketSite.css">
 @{
-    var favorite = FavoriteRepos.GetFavorite();
+    int? userId = Context.Session.GetInt32("UserId");
+
+    Favorite favorite = new Favorite();
+
+    if (userId != null)
+    {
+        favorite = FavoriteRepos.GetFavorite(userId.Value);
+    }
 }
 <!DOCTYPE html>
 <html lang="ru">
@@ -27,10 +35,22 @@
 
                 <div class="card">
 
-                    <button class="favorite @(favorite.Products.Any(x => x.Id == product.Id) ? "active" : "")"
-                            onclick="location.href='/Favorite/Toggle?id=@product.Id'">
-                        @(favorite.Products.Any(x => x.Id == product.Id) ? "★" : "☆")
-                    </button>
+                    @if (userId == null)
+                    {
+                        <button class="favorite"
+                                onclick="location.href='/Account/Auth'">
+                            ☆
+                        </button>
+                    }
+                    else
+                    {
+                        bool isFavorite = favorite.Products.Any(x => x.Id == product.Id);
+
+                        <button class="favorite @(isFavorite ? "active" : "")"
+                                onclick="location.href='/Favorite/Toggle?id=@product.Id'">
+                            @(isFavorite ? "★" : "☆")
+                        </button>
+                    }
 
                     <div class="product-image">
                         Фото товара
@@ -91,7 +111,8 @@
                     Вернуться к покупкам
                 </button>
 
-                <button class="checkout-btn">
+                <button class="checkout-btn" 
+                onclick="location.href='/Order/CreateFromBasket'">
                     Оформить заказ
                 </button>
 
@@ -105,32 +126,5 @@
         </div>
 
     </main>
-    <footer>
-        <div class="footer-content">
-
-            <div>
-                <h3>Барахолка</h3>
-                <p>Площадка для покупки и продажи товаров.</p>
-            </div>
-
-            <div>
-                <h3>Контакты</h3>
-                <p>Email: support@baraholka.ru</p>
-                <p>Телефон: +8 (800) 555-35-35</p>
-            </div>
-
-            <div>
-                <h3>Информация</h3>
-                <p>Пользовательское соглашение</p>
-                <p>Политика конфиденциальности</p>
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-            © 2026 Барахолка. Все права защищены.
-        </div>
-
-    </footer>
 </body>
 </html>

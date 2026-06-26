@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Вход";
+}
+<link rel="stylesheet" href="~/css/AuthSite.css">
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <h1>Вход</h1>
+
+        <form method="post" class="auth-form">
+
+            <input type="text"
+                   placeholder="Логин"
+                   name="login">
+
+            <input type="password"
+                   placeholder="Пароль"
+                   name="password">
+
+            <button type="submit">
+                Войти
+            </button>
+
+            <a asp-action="Register">
+                Нет аккаунта?
+            </a>
+
+        </form>
+
+    </div>
+</div>

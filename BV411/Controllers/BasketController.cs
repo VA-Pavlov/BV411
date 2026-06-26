@@ -7,12 +7,24 @@ namespace BV411.Controllers
     {
         public IActionResult Index(int basketId)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Auth", "Account");
+            }
+            var basket = BasketRepos.GetBasket(userId.Value);
             return View(basket);
         }
         public IActionResult Add(int basketId, int id)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Auth", "Account");
+            }
+            var basket = BasketRepos.GetBasket(userId.Value);
 
             var product = ProductsRepos.product
                 .FirstOrDefault(x => x.Id == id);
@@ -31,7 +43,13 @@ namespace BV411.Controllers
         }
         public IActionResult Remove(int basketId, int id)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Auth", "Account");
+            }
+            var basket = BasketRepos.GetBasket(userId.Value);
 
             basket.Products.RemoveAll(x => x.Id == id);
 
@@ -39,7 +57,13 @@ namespace BV411.Controllers
         }
         public IActionResult Minus(int basketId, int id)
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Auth", "Account");
+            }
+            var basket = BasketRepos.GetBasket(userId.Value);
 
             var product = basket.Products
                 .FirstOrDefault(x => x.Id == id);

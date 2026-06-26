@@ -1,0 +1,47 @@
+﻿<link rel="stylesheet" href="~/css/AuthSite.css">
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <h1>Регистрация</h1>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post" class="auth-form">
+
+            <input type="text"
+                   name="login"
+                   placeholder="Логин"
+                   required>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Пароль"
+                   required>
+
+            <input type="email"
+                   name="email"
+                   placeholder="Email"
+                   required>
+
+            <input type="text"
+                   name="phone"
+                   placeholder="Телефон"
+                   required>
+
+            <button type="submit">
+                Зарегистрироваться
+            </button>
+
+            <a asp-action="Login">
+                Уже есть аккаунт?
+            </a>
+
+        </form>
+
+    </div>
+</div>

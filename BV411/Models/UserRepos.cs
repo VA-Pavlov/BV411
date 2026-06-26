@@ -1,47 +1,66 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace BV411.Models
+﻿namespace BV411.Models
 {
     public static class UserRepos
     {
         private static List<User> users = new();
-        private static int _id = 1;
 
-        // REGISTER
-        public static User Register(User user)
+        static UserRepos()
         {
-            user.Id = _id++;
-            users.Add(user);
-            return user;
+            users.Add(new User
+            {
+                Id = 1,
+                Login = "admin",
+                Password = "123",
+
+                Email = "admin@mail.ru",
+                Phone = "+7 (999) 111-11-11",
+
+                Basket = new Basket(),
+                Favorite = new Favorite()
+            });
         }
 
-        // LOGIN
-        public static User Login(string login, string password)
+        public static List<User> Users => users;
+
+        public static User? Get(string login, string password)
         {
             return users.FirstOrDefault(x =>
                 x.Login == login &&
                 x.Password == password);
         }
 
-        // GET BY ID
-        public static User GetById(int id)
+        public static User? Get(int id)
         {
             return users.FirstOrDefault(x => x.Id == id);
         }
 
-        // UPDATE
-        public static void Update(User updated)
+        public static bool Exists(string login)
         {
-            var user = users.FirstOrDefault(x => x.Id == updated.Id);
+            return users.Any(x => x.Login == login);
+        }
 
-            if (user == null) return;
+        public static User Register(
+            string login,
+            string password,
+            string email,
+            string phone)
+        {
+            var user = new User
+            {
+                Id = users.Count + 1,
 
-            user.Login = updated.Login;
-            user.Password = updated.Password;
-            user.Email = updated.Email;
-            user.Phone = updated.Phone;
-            user.Avatar = updated.Avatar;
+                Login = login,
+                Password = password,
+                Email = email,
+                Phone = phone,
+
+                Basket = new Basket(),
+                Favorite = new Favorite()
+            };
+
+            users.Add(user);
+
+            return user;
         }
     }
 }

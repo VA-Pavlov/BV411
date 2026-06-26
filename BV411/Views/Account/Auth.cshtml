@@ -1,0 +1,33 @@
+﻿<link rel="stylesheet" href="~/css/AuthSite.css">
+
+<div class="auth-wrapper">
+
+    <div class="auth-card">
+
+        <h1>Добро пожаловать!</h1>
+
+        <p>
+            Для использования корзины и избранного
+            необходимо войти в аккаунт
+            или создать новый.
+        </p>
+
+        <div class="auth-buttons">
+
+            <a asp-controller="Account"
+               asp-action="Login"
+               class="login-btn">
+                Войти
+            </a>
+
+            <a asp-controller="Account"
+               asp-action="Register"
+               class="register-btn">
+                Регистрация
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,9 +1,13 @@
-﻿public static class FavoriteRepos
+﻿namespace BV411.Models
 {
-    private static Favorite favorite = new Favorite();
-
-    public static Favorite GetFavorite()
+    public static class FavoriteRepos
     {
-        return favorite;
+        public static Favorite GetFavorite(int userId)
+        {
+            var user =
+                UserRepos.Get(userId);
+
+            return user.Favorite;
+        }
     }
 }

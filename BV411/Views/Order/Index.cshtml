@@ -1,0 +1,20 @@
+﻿@model List<BV411.Models.Order>
+
+<h2>Мои заказы</h2>
+
+@foreach (var order in Model)
+{
+    <div class="card">
+
+        <h3>Заказ №@order.Id</h3>
+
+        <p>Статус: @order.Status</p>
+        <p>Сумма: @order.TotalPrice ₽</p>
+        <p>Дата: @order.CreatedAt</p>
+
+        <button onclick="location.href='/Order/Details/@order.Id'">
+            Подробнее
+        </button>
+
+    </div>
+}

@@ -7,12 +7,28 @@ namespace BV411.Controllers
     {
         public IActionResult Index()
         {
-            return View(FavoriteRepos.GetFavorite());
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var favorite = FavoriteRepos.GetFavorite(userId.Value);
+
+            return View(favorite);
         }
 
         public IActionResult Toggle(int id)
         {
-            var favorite = FavoriteRepos.GetFavorite();
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var favorite = FavoriteRepos.GetFavorite(userId.Value);
 
             var product = favorite.Products
                 .FirstOrDefault(x => x.Id == id);

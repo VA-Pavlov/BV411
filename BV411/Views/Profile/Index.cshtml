@@ -1,59 +1,24 @@
-﻿@{
-    Layout = null;
-}
+﻿@model User
+<link rel="stylesheet" href="~/css/ProfileSite.css">
+<main class="profile-wrapper">
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Аккаунт</title>
-    <link rel="stylesheet" href="~/css/BasketSite.css">
-</head>
+    <div class="profile-card">
 
-<body>
-
-    <main>
-
-        <h2>Аккаунт</h2>
-
-        <div class="products">
-
-            <div class="card">
-
-                <h3>Вход</h3>
-
-                <form method="post" action="/Profile/Login">
-
-                    <input name="login" placeholder="Логин" />
-                    <input name="password" type="password" placeholder="Пароль" />
-
-                    <button type="submit">Войти</button>
-
-                </form>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Регистрация</h3>
-
-                <form method="post" action="/Profile/Register">
-
-                    <input name="Login" placeholder="Логин" />
-                    <input name="Password" type="password" placeholder="Пароль" />
-                    <input name="Email" placeholder="Email" />
-                    <input name="Phone" placeholder="Телефон" />
-                    <input name="Avatar" placeholder="Avatar URL" />
-
-                    <button type="submit">Создать аккаунт</button>
-
-                </form>
-
-            </div>
-
+        <div class="avatar">
+            <img src="@Model.Avatar" />
         </div>
 
-    </main>
+        <h2>@Model.Login</h2>
 
-</body>
-</html>
+        <div class="profile-info">
+            <p>@Model.Email</p>
+            <p>@Model.Phone</p>
+        </div>
+
+        <button onclick="location.href='/Profile/Edit'">
+            Редактировать профиль
+        </button>
+
+    </div>
+
+</main>

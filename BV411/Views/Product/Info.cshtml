@@ -1,8 +1,17 @@
 ﻿@model Product
+@using Microsoft.AspNetCore.Http
 @using BV411.Models
 
 @{
-    var favorite = FavoriteRepos.GetFavorite();
+    int? userId = Context.Session.GetInt32("UserId");
+
+    Favorite favorite = new Favorite();
+
+    if (userId != null)
+    {
+        favorite = FavoriteRepos.GetFavorite(userId.Value);
+    }
+
     bool isFavorite = favorite.Products.Any(x => x.Id == Model.Id);
 }
 <div class="product-page">
@@ -13,10 +22,20 @@
 
     <div class="product-info">
 
-        <button class="product-favorite @(isFavorite ? "active" : "")"
-                onclick="location.href='/Favorite/Toggle?id=@Model.Id'">
-            @(isFavorite ? "★" : "☆")
-        </button>
+        @if (userId == null)
+        {
+            <button class="product-favorite"
+                    onclick="location.href='/Account/Auth'">
+                ☆
+            </button>
+        }
+        else
+        {
+            <button class="product-favorite @(isFavorite ? "active" : "")"
+                    onclick="location.href='/Favorite/Toggle?id=@Model.Id'">
+                @(isFavorite ? "★" : "☆")
+            </button>
+        }
 
         <h1>@Model.Name</h1>
 

@@ -1,0 +1,36 @@
+﻿@model BV411.Models.Order
+
+@{
+    ViewData["Title"] = "Заказ";
+}
+
+<h2>Заказ №@Model.Id</h2>
+
+<div class="card">
+
+    <p><b>Статус:</b> @Model.Status</p>
+    <p><b>Дата:</b> @Model.CreatedAt</p>
+    <p><b>Итого:</b> @Model.TotalPrice ₽</p>
+
+</div>
+
+<h3 style="margin-top:20px;">Товары</h3>
+
+@foreach (var item in Model.Items)
+{
+    <div class="card">
+
+        <h4>@item.ProductName</h4>
+
+        <p>Количество: @item.Quantity</p>
+        <p>Цена: @item.Price ₽</p>
+        <p>Сумма: @(item.Price * item.Quantity) ₽</p>
+
+    </div>
+}
+
+<div style="margin-top:20px;">
+    <button onclick="location.href='/Order/Index'">
+        ← Назад к заказам
+    </button>
+</div>

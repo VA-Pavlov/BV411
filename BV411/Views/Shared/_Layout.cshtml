@@ -21,15 +21,48 @@
         </section>
         <div class="buttons">
             <button>Каталог</button>
-            <button onclick="location.href='/Favorite/Index'">
-                Избранное
-            </button>
-            <button onclick="location.href='/Basket/Index'">
-                Корзина
-            </button>
-            <button onclick="location.href='/Profile/Index'">
-                Профиль
+            @if (Context.Session.GetInt32("UserId") == null)
+            {
+                <button onclick="location.href='/Account/Auth'">
+
+                    Избранное
+
                 </button>
+            }
+            else
+            {
+                <button onclick="location.href='/Favorite/Index'">
+
+                    Избранное
+
+                </button>
+            }
+            @if (Context.Session.GetInt32("UserId") == null)
+            {
+                <button onclick="location.href='/Account/Auth'">
+
+                    Корзина
+
+                </button>
+            }
+            else
+            {
+                <button onclick="location.href='/Basket/Index'">
+                    Корзина
+                    </button>
+            }
+            @if (Context.Session.GetInt32("UserId") == null)
+            {
+                <button onclick="location.href='/Account/Auth'">
+                    Войти
+                </button>
+            }
+            else
+            {
+                <button onclick="location.href='/Profile'">
+                    Профиль
+                </button>
+            }
         </div>
     </header>
 
