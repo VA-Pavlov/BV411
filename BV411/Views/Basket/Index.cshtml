@@ -1,4 +1,5 @@
-﻿@model Basket
+﻿@using BV411.Models.Entities
+@model Basket
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -27,7 +28,7 @@
                 <div class="cart-item">
                     <div class="item-image">
                         <!-- SVG-заглушка вместо картинки: стилизованный значок товара -->
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="@product.Image">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="@product.Product.Image">
                             <rect x="8" y="12" width="32" height="24" rx="4" fill="#A0B8D4" />
                             <circle cx="20" cy="26" r="4" fill="#F0F4FA" />
                             <circle cx="28" cy="26" r="4" fill="#F0F4FA" />
@@ -36,14 +37,14 @@
                         </svg>
                     </div>
                     <div class="item-details">
-                        <div class="item-name">@product.Name</div>
-                        <div class="item-price">@product.Prise ₽ <small>за шт.</small></div>
+                        <div class="item-name">@product.Product.Name</div>
+                        <div class="item-price">@product.Product.Prise ₽ <small>за шт.</small></div>
                     </div>
                     <div class="item-actions">
                         <div class="item-quantity">
-                            <button aria-label="уменьшить">−</button>
-                            <span>1</span>
-                            <button aria-label="увеличить">+</button>
+                            <a href="https://localhost:7213/Basket/Lover/@product.Product.Id=" увеличить">-</a>
+                            <span>@product.Count</span>
+                            <a href="https://localhost:7213/Basket/Upper/@product.Product.Id=" увеличить">+</a>
                         </div>
                         <a href="https://localhost:7213/Basket/delete/@i" class="nav__link nav__link--highlight">
                             <span>🗑️ Удалить</span>

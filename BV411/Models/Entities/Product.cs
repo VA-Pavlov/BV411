@@ -1,6 +1,7 @@
-﻿namespace BV411.Models
+﻿namespace BV411.Models.Entities
 {
-    public class Danik
+    public class Product
+
     {
         public int Id { get; set; }
         public string Image { get; set; }
