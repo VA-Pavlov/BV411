@@ -1,4 +1,5 @@
-﻿@model Basket
+﻿@using BV411.Models.Entities
+@model Basket
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -75,7 +76,7 @@
         </div>
         <div class="cart-global-actions">
             <button class="nav__link">💳 Купить</button>
-            <a href="https://localhost:7213/Basket?basketId=@Model.Id" class="nav__link">
+            <a href="https://localhost:7213/Basket/Clear?basketId=@Model.Id" class="nav__link">
                 <span>🧹 Очистить корзину</span>
             </a>
         </div>

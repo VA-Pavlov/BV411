@@ -1,53 +1,60 @@
-﻿using BV411.Models;
+﻿using BV411.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BV411.Controllers
 {
     public class BasketController : Controller
     {
-        public IActionResult Index(int basketId)
+        public IActionResult Index(int Id)
         {
-
-            var basked = BasketRepos.GetBasket(basketId);
+            var user = UsersRepos.Users.FirstOrDefault(user => user.Id == Id);
+            var basked = user.Basket;
 
             return View(basked);
         }
-        public IActionResult Lover (int basketId, int id)
+        public IActionResult Lover (int userId, int id)
         {
-            var basked = BasketRepos.GetBasket(basketId);
+            var user = UsersRepos.Users.FirstOrDefault(user => user.Id == userId);
+            var basked = user.Basket;
             var basketProdukt = basked.Products
                 .FirstOrDefault(pr => pr.Product.Id == id);
             if(basketProdukt != null)
             {
                 basketProdukt.Count--;
             }
-
-            return RedirectToAction("Index", new { basketId = basketId });
+            if(basketProdukt.Count == 0)
+            {
+                basked.Products.Remove(basketProdukt);
+            }
+            return RedirectToAction("Index", new { Id = userId });
         }
-        public IActionResult Upper(int basketId, int id)
+        public IActionResult Upper(int userId, int id)
         {
-            var basked = BasketRepos.GetBasket(basketId);
+            var user = UsersRepos.Users.FirstOrDefault(user => user.Id == userId);
+            var basked = user.Basket;
             var basketProdukt = basked.Products
-                 .FirstOrDefault(pr => pr.Product.Id == basketId);
+                 .FirstOrDefault(pr => pr.Product.Id == id);
             if (basketProdukt != null)
             {
                 basketProdukt.Count++;
             }
-            return RedirectToAction("Index", new { basketId = basketId });
+            return RedirectToAction("Index", new { Id = userId });
         }
-        public IActionResult Delete(int basketId,int number)
+        public IActionResult Delete(int userId, int number)
         {
-            var basked = BasketRepos.GetBasket(basketId);
+            var user = UsersRepos.Users.FirstOrDefault(user => user.Id == userId);
+            var basked = user.Basket;
             basked.Products.RemoveAt(number);
 
-            return RedirectToAction("Index", new { basketId = basketId });
+            return RedirectToAction("Index", new { Id = userId });
         }
-        public IActionResult Clear(int basketId)
+        public IActionResult Clear(int userId)
         {
-            var basked = BasketRepos.GetBasket(basketId);
+            var user = UsersRepos.Users.FirstOrDefault(user => user.Id == userId);
+            var basked = user.Basket;
             basked.Products.Clear();
 
-            return RedirectToAction("Index", new { basketId = basketId });
+            return RedirectToAction("Index", new { Id = userId });
         }
     }
 }

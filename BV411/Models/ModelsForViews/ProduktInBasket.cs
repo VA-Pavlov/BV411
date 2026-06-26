@@ -1,4 +1,6 @@
-﻿namespace BV411.Models
+﻿using BV411.Models.Entities;
+
+namespace BV411.Models.ModelsForViews
 {
     public class ProduktInBasket
     {

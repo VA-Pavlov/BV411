@@ -1,4 +1,4 @@
-﻿namespace BV411.Models
+﻿namespace BV411.Models.Entities
 {
     public class Product
     {
