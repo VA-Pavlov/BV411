@@ -1,23 +1,39 @@
 ﻿@model User
+
 <link rel="stylesheet" href="~/css/ProfileSite.css">
+
 <main class="profile-wrapper">
 
     <div class="profile-card">
 
         <div class="avatar">
-            <img src="@Model.Avatar" />
+            <img src="@Model.Avatar" alt="Аватар" />
         </div>
 
         <h2>@Model.Login</h2>
 
         <div class="profile-info">
-            <p>@Model.Email</p>
-            <p>@Model.Phone</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Телефон:</strong> @Model.Phone</p>
         </div>
 
-        <button onclick="location.href='/Profile/Edit'">
-            Редактировать профиль
-        </button>
+        <div class="profile-buttons">
+
+            <button class="edit-btn"
+                    onclick="location.href='/Profile/Edit'">
+                Редактировать профиль
+            </button>
+            <button class="orders-btn"
+                    onclick="location.href='/Order'">
+                Мои заказы
+            </button>
+
+            <button class="logout-btn"
+                    onclick="location.href='/Account/Logout'">
+                Выйти из аккаунта
+            </button>
+
+        </div>
 
     </div>
 

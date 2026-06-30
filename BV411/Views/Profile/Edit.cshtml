@@ -1,0 +1,47 @@
+﻿@model User
+
+<link rel="stylesheet" href="~/css/ProfileSite.css">
+
+<main class="profile-wrapper">
+
+    <div class="profile-card">
+
+        <h2>Редактирование профиля</h2>
+
+        <form method="post" class="edit-form">
+
+            <label>Логин</label>
+            <input asp-for="Login" />
+
+            <label>Email</label>
+            <input asp-for="Email" type="email" />
+
+            <label>Телефон</label>
+            <input asp-for="Phone" />
+
+            <label>Ссылка на аватар</label>
+            <input asp-for="Avatar" />
+
+            <div class="avatar-preview">
+                <img src="@Model.Avatar" alt="Аватар" />
+            </div>
+
+            <div class="profile-buttons">
+
+                <button type="submit" class="save-btn">
+                    Сохранить
+                </button>
+
+                <button type="button"
+                        class="cancel-btn"
+                        onclick="location.href='/Profile'">
+                    Отмена
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>

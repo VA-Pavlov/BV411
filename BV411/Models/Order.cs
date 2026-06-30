@@ -8,10 +8,12 @@
 
         public List<OrderItem> Items { get; set; } = new();
 
-        public decimal TotalPrice => Items.Sum(x => x.Price * x.Quantity);
+        public decimal TotalPrice =>
+            Items.Sum(x => x.Price * x.Quantity);
 
         public string Status { get; set; } = "Создан";
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } =
+            DateTime.Now;
     }
 }

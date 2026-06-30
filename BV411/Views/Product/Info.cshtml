@@ -50,8 +50,13 @@
         <div class="product-buttons">
 
             <button class="buy-btn"
-                    onclick="location.href='/Basket/Add?basketId=0&id=@Model.Id'">
+                    onclick="location.href='/Basket/Add?id=@Model.Id'">
                 Добавить в корзину
+            </button>
+
+            <button class="buy-btn"
+                    onclick="location.href='/Order/BuyNow?id=@Model.Id'">
+                Купить сейчас
             </button>
 
             <a asp-controller="Product"

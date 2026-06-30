@@ -52,7 +52,9 @@
             <button onclick="location.href='/Basket/Add/@product.Id'">
                 Добавить в корзину
             </button>
-            <button>Купить</button>
+            <button onclick="location.href='/Order/BuyNow?id=@product.Id'">
+                Купить
+            </button>
 
         </div>
     }

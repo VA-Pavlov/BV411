@@ -2,50 +2,69 @@
 {
     public static class OrderRepos
     {
-        private static List<Order> orders = new();
         private static int nextId = 1;
 
         public static List<Order> GetByUser(int userId)
         {
-            return orders
-                .Where(x => x.UserId == userId)
+            var user = UserRepos.Get(userId);
+
+            if (user == null)
+                return new List<Order>();
+
+            return user.Orders
                 .OrderByDescending(x => x.CreatedAt)
                 .ToList();
         }
 
-        public static Order GetById(int id)
+        public static Order? GetById(int id)
         {
-            return orders.FirstOrDefault(x => x.Id == id);
+            foreach (var user in UserRepos.Users)
+            {
+                var order = user.Orders.FirstOrDefault(x => x.Id == id);
+
+                if (order != null)
+                    return order;
+            }
+
+            return null;
         }
 
         public static Order CreateFromBasket(Basket basket)
         {
+            var user = UserRepos.Get(basket.UserId);
+
+            if (user == null)
+                throw new Exception("Пользователь не найден");
+
             var order = new Order
             {
                 Id = nextId++,
-                UserId = basket.UserId,
+                UserId = user.Id,
                 Status = "Создан"
             };
 
-            foreach (var p in basket.BasketProducts)
+            foreach (var group in basket.Products.GroupBy(x => x.Id))
             {
+                var product = group.First();
+
                 order.Items.Add(new OrderItem
                 {
-                    ProductId = p.ProductId,
-                    ProductName = p.Product.Name,
-                    Price = p.Product.Price,
-                    Quantity = p.Quantity
+                    ProductId = product.Id,
+                    ProductName = product.Name,
+                    Price = product.Price,
+                    Quantity = group.Count()
                 });
             }
 
-            orders.Add(order);
+            user.Orders.Add(order);
 
             return order;
         }
 
-        public static void ChangeStatus(int orderId, string status)
+        public static void ChangeStatus(int id, string status)
         {
-            var order = GetById(orderId);
+            var order = GetById(id);
+
             if (order != null)
                 order.Status = status;
         }

@@ -16,7 +16,8 @@
                 Phone = "+7 (999) 111-11-11",
 
                 Basket = new Basket(),
-                Favorite = new Favorite()
+                Favorite = new Favorite(),
+                Orders = new List<Order>()
             });
         }
 
@@ -51,16 +52,30 @@
 
                 Login = login,
                 Password = password,
+
                 Email = email,
                 Phone = phone,
 
                 Basket = new Basket(),
-                Favorite = new Favorite()
+                Favorite = new Favorite(),
+                Orders = new List<Order>()
             };
 
             users.Add(user);
 
             return user;
+        }
+        public static void Update(User model)
+        {
+            var user = Get(model.Id);
+
+            if (user == null)
+                return;
+
+            user.Login = model.Login;
+            user.Email = model.Email;
+            user.Phone = model.Phone;
+            user.Avatar = model.Avatar;
         }
     }
 }

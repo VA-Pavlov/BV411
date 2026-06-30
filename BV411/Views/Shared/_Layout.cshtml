@@ -20,7 +20,6 @@
             <button>Найти</button>
         </section>
         <div class="buttons">
-            <button>Каталог</button>
             @if (Context.Session.GetInt32("UserId") == null)
             {
                 <button onclick="location.href='/Account/Auth'">
@@ -54,6 +53,22 @@
             @if (Context.Session.GetInt32("UserId") == null)
             {
                 <button onclick="location.href='/Account/Auth'">
+
+                    Мои заказы
+
+                </button>
+            }
+            else
+            {
+                <button onclick="location.href='/Order'">
+
+                    Мои заказы
+
+                </button>
+            }
+            @if (Context.Session.GetInt32("UserId") == null)
+            {
+                <button onclick="location.href='/Account/Auth'">
                     Войти
                 </button>
             }
@@ -74,10 +89,6 @@
             <h1>Добро пожаловать на Барахолку</h1>
 
             <p>100% легально и 100% не из Escape From Tarkov</p>
-
-            <button onclick="location.href='/Product/Index'">
-                Перейти в каталог
-            </button>
 
         </section>
     }

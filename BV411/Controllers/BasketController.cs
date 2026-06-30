@@ -13,9 +13,10 @@ namespace BV411.Controllers
             {
                 return RedirectToAction("Auth", "Account");
             }
-            var basket = BasketRepos.GetBasket(userId.Value);
+            var basket = BasketRepos.GetByUser(userId.Value);
             return View(basket);
         }
+
         public IActionResult Add(int basketId, int id)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
@@ -24,7 +25,7 @@ namespace BV411.Controllers
             {
                 return RedirectToAction("Auth", "Account");
             }
-            var basket = BasketRepos.GetBasket(userId.Value);
+            var basket = BasketRepos.GetByUser(userId.Value);
 
             var product = ProductsRepos.product
                 .FirstOrDefault(x => x.Id == id);
@@ -49,7 +50,7 @@ namespace BV411.Controllers
             {
                 return RedirectToAction("Auth", "Account");
             }
-            var basket = BasketRepos.GetBasket(userId.Value);
+            var basket = BasketRepos.GetByUser(userId.Value);
 
             basket.Products.RemoveAll(x => x.Id == id);
 
@@ -63,7 +64,7 @@ namespace BV411.Controllers
             {
                 return RedirectToAction("Auth", "Account");
             }
-            var basket = BasketRepos.GetBasket(userId.Value);
+            var basket = BasketRepos.GetByUser(userId.Value);
 
             var product = basket.Products
                 .FirstOrDefault(x => x.Id == id);
@@ -75,16 +76,16 @@ namespace BV411.Controllers
 
             return RedirectToAction("Index", new { basketId });
         }
-        public IActionResult Clear(int basketId)
+        public IActionResult Clear()
         {
-            var basket = BasketRepos.GetBasket(basketId);
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if (basket != null)
-            {
-                basket.Products.Clear();
-            }
+            if (userId == null)
+                return RedirectToAction("Auth", "Account");
 
-            return RedirectToAction("Index", new { basketId });
+            BasketRepos.Clear(userId.Value);
+
+            return RedirectToAction("Index");
         }
     }
 }

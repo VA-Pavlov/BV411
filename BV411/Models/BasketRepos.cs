@@ -2,24 +2,21 @@
 {
     public static class BasketRepos
     {
-        private static List<Basket> baskets = new();
-
-        public static Basket GetBasket(int userId)
+        public static Basket GetByUser(int userId)
         {
-            var basket = baskets.FirstOrDefault(x => x.UserId == userId);
+            var user = UserRepos.Get(userId);
 
-            if (basket == null)
-            {
-                basket = new Basket
-                {
-                    Id = baskets.Count + 1,
-                    UserId = userId
-                };
+            if (user == null)
+                throw new Exception("Пользователь не найден");
 
-                baskets.Add(basket);
-            }
+            user.Basket.UserId = userId;
 
-            return basket;
+            return user.Basket;
+        }
+
+        public static void Clear(int userId)
+        {
+            GetByUser(userId).Products.Clear();
         }
     }
 }

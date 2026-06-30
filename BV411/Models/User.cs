@@ -12,5 +12,6 @@
         public Basket Basket { get; set; }
 
         public Favorite Favorite { get; set; }
+        public List<Order> Orders { get; set; } = new();
     }
 }

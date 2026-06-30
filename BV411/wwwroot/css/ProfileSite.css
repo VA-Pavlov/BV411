@@ -69,3 +69,116 @@ body {
     .profile-card button:hover {
         background: #555;
     }
+
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.edit-btn,
+.logout-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.edit-btn {
+    background: #3b3b3b;
+    color: white;
+}
+
+    .edit-btn:hover {
+        background: #555;
+    }
+
+.logout-btn {
+    background: #8b2d2d;
+    color: white;
+}
+
+    .logout-btn:hover {
+        background: #b53c3c;
+    }
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+    .edit-form label {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .edit-form input {
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #555;
+        background: #2b2b2b;
+        color: white;
+        font-size: 16px;
+    }
+
+.avatar-preview {
+    margin: 15px auto;
+}
+
+    .avatar-preview img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #555;
+    }
+
+.save-btn,
+.cancel-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.save-btn {
+    background: #2f7d32;
+    color: white;
+}
+
+    .save-btn:hover {
+        background: #3fa546;
+    }
+
+.cancel-btn {
+    background: #555;
+    color: white;
+}
+
+    .cancel-btn:hover {
+        background: #777;
+    }
+.orders-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    background: #355c9c;
+    color: white;
+    transition: .3s;
+}
+
+    .orders-btn:hover {
+        background: #4876c2;
+    }
