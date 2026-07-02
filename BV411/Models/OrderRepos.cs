@@ -68,5 +68,14 @@
             if (order != null)
                 order.Status = status;
         }
+        public static List<Order> GetAll()
+        {
+            return UserRepos.Users
+                .SelectMany(x => x.Orders)
+                .OrderByDescending(x => x.CreatedAt)
+                .ToList();
+        }
+
+
     }
 }

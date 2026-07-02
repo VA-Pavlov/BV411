@@ -4,10 +4,12 @@
 @{
     int? userId = Context.Session.GetInt32("UserId");
 
+    User? user = null;
     Favorite favorite = new Favorite();
 
     if (userId != null)
     {
+        user = UserRepos.Get(userId.Value);
         favorite = FavoriteRepos.GetFavorite(userId.Value);
     }
 }
@@ -49,14 +51,16 @@
 
             <p>@product.Price.ToString("N0") ₽</p>
 
-            <button onclick="location.href='/Basket/Add/@product.Id'">
-                Добавить в корзину
-            </button>
-            <button onclick="location.href='/Order/BuyNow?id=@product.Id'">
-                Купить
-            </button>
+            @if (user == null || !user.IsAdmin)
+            {
+                <button onclick="location.href='/Basket/Add?basketId=0&id=@product.Id'">
+                    Добавить в корзину
+                </button>
 
+                <button onclick="location.href='/Order/BuyNow?id=@product.Id'">
+                    Купить
+                </button>
+            }
         </div>
     }
-
 </div>

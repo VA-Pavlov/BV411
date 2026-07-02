@@ -1,0 +1,27 @@
+﻿@model Product
+
+<link rel="stylesheet" href="~/css/AdminSite.css" />
+
+<div class="edit-product">
+
+    <h1>Редактирование товара</h1>
+
+    <form method="post">
+
+        <input asp-for="Id" hidden />
+
+        <input asp-for="Name" />
+
+        <textarea asp-for="Description"></textarea>
+
+        <input asp-for="Price" />
+
+        <input asp-for="Image" />
+
+        <button type="submit">
+            Сохранить
+        </button>
+
+    </form>
+
+</div>

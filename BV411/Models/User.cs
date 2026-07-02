@@ -9,6 +9,7 @@
         public string? Email { get; set; }
         public string? Phone { get; set; }
         public string? Avatar { get; set; }
+        public bool IsAdmin { get; set; }
         public Basket Basket { get; set; }
 
         public Favorite Favorite { get; set; }

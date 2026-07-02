@@ -10,8 +10,13 @@ namespace BV411.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
+                return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Admin");
             }
 
             var favorite = FavoriteRepos.GetFavorite(userId.Value);
@@ -24,8 +29,13 @@ namespace BV411.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
+                return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Admin");
             }
 
             var favorite = FavoriteRepos.GetFavorite(userId.Value);

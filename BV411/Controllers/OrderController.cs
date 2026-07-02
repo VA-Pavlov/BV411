@@ -7,11 +7,17 @@ namespace BV411.Controllers
     {
         public IActionResult Index()
         {
-            int? userId =
-                HttpContext.Session.GetInt32("UserId");
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
 
             var orders =
                 OrderRepos.GetByUser(userId.Value);
@@ -21,11 +27,17 @@ namespace BV411.Controllers
 
         public IActionResult CreateFromBasket()
         {
-            int? userId =
-                HttpContext.Session.GetInt32("UserId");
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
 
             var basket =
                 BasketRepos.GetByUser(userId.Value);
@@ -48,20 +60,24 @@ namespace BV411.Controllers
             if (userId == null)
                 return RedirectToAction("Auth", "Account");
 
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+                return RedirectToAction("Index", "Admin");
+
             var product = ProductsRepos.product
                 .FirstOrDefault(x => x.Id == id);
 
             if (product == null)
                 return RedirectToAction("Index", "Product");
 
-            var basket = new Basket
-            {
-                UserId = userId.Value
-            };
-
+            var basket = BasketRepos.GetByUser(userId.Value);
+            basket.Products.Clear();
             basket.Products.Add(product);
 
             var order = OrderRepos.CreateFromBasket(basket);
+
+            BasketRepos.Clear(userId.Value);
 
             return RedirectToAction("Details", new { id = order.Id });
         }

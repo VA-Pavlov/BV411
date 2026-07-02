@@ -9,6 +9,7 @@
             users.Add(new User
             {
                 Id = 1,
+
                 Login = "admin",
                 Password = "123",
 
@@ -17,7 +18,8 @@
 
                 Basket = new Basket(),
                 Favorite = new Favorite(),
-                Orders = new List<Order>()
+
+                IsAdmin = true
             });
         }
 
@@ -58,24 +60,13 @@
 
                 Basket = new Basket(),
                 Favorite = new Favorite(),
-                Orders = new List<Order>()
+
+                IsAdmin = false
             };
 
             users.Add(user);
 
             return user;
-        }
-        public static void Update(User model)
-        {
-            var user = Get(model.Id);
-
-            if (user == null)
-                return;
-
-            user.Login = model.Login;
-            user.Email = model.Email;
-            user.Phone = model.Phone;
-            user.Avatar = model.Avatar;
         }
     }
 }

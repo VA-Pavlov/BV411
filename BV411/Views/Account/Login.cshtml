@@ -1,6 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Вход";
 }
+@if (TempData["Success"] != null)
+{
+    <div class="success">
+        @TempData["Success"]
+    </div>
+}
 <link rel="stylesheet" href="~/css/AuthSite.css">
 <div class="auth-wrapper">
     <div class="auth-card">
@@ -20,7 +26,9 @@
             <button type="submit">
                 Войти
             </button>
-
+            <a asp-action="Forgot">
+                Забыли пароль?
+            </a>
             <a asp-action="Register">
                 Нет аккаунта?
             </a>

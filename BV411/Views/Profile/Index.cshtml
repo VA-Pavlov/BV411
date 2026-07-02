@@ -23,10 +23,19 @@
                     onclick="location.href='/Profile/Edit'">
                 Редактировать профиль
             </button>
-            <button class="orders-btn"
-                    onclick="location.href='/Order'">
-                Мои заказы
-            </button>
+            @if (Model.IsAdmin)
+            {
+                <button onclick="location.href='/Admin'">
+                    Панель администратора
+                </button>
+            }
+            else
+            {
+                <button onclick="location.href='/Order'">
+                    Мои заказы
+                </button>
+            }
+
 
             <button class="logout-btn"
                     onclick="location.href='/Account/Logout'">

@@ -1,0 +1,59 @@
+﻿@model List<Product>
+
+<link rel="stylesheet" href="~/css/AdminSite.css" />
+
+<div class="admin-products">
+
+    <div class="top-panel">
+
+        <h1>Товары</h1>
+
+        <a asp-action="CreateProduct"
+           class="add-btn">
+
+            + Добавить товар
+
+        </a>
+
+    </div>
+
+    <div class="products">
+
+        @foreach (var product in Model)
+        {
+            <div class="card">
+
+                <div class="product-image">
+
+                    Фото
+
+                </div>
+
+                <h2>@product.Name</h2>
+
+                <p>@product.Price.ToString("N0") ₽</p>
+
+                <div class="card-buttons">
+
+                    <a asp-action="EditProduct"
+                       asp-route-id="@product.Id">
+
+                        Редактировать
+
+                    </a>
+
+                    <a asp-action="DeleteProduct"
+                       asp-route-id="@product.Id">
+
+                        Удалить
+
+                    </a>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

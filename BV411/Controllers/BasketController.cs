@@ -10,8 +10,13 @@ namespace BV411.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
             }
             var basket = BasketRepos.GetByUser(userId.Value);
             return View(basket);
@@ -22,8 +27,13 @@ namespace BV411.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
             }
             var basket = BasketRepos.GetByUser(userId.Value);
 
@@ -47,8 +57,13 @@ namespace BV411.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
             }
             var basket = BasketRepos.GetByUser(userId.Value);
 
@@ -61,8 +76,13 @@ namespace BV411.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
             }
             var basket = BasketRepos.GetByUser(userId.Value);
 
@@ -82,6 +102,13 @@ namespace BV411.Controllers
 
             if (userId == null)
                 return RedirectToAction("Auth", "Account");
+
+            var user = UserRepos.Get(userId.Value);
+
+            if (user != null && user.IsAdmin)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
 
             BasketRepos.Clear(userId.Value);
 

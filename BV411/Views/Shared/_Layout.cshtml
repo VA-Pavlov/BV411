@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using BV411.Models
+@using Microsoft.AspNetCore.Http
+
+@{
+    User? currentUser = null;
+
+    int? userId = Context.Session.GetInt32("UserId");
+
+    if (userId != null)
+    {
+        currentUser = UserRepos.Get(userId.Value);
+    }
+}
+
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -20,64 +34,43 @@
             <button>Найти</button>
         </section>
         <div class="buttons">
-            @if (Context.Session.GetInt32("UserId") == null)
+
+            @if (currentUser == null)
             {
-                <button onclick="location.href='/Account/Auth'">
+                <button onclick="location.href='/Account/Auth'">Избранное</button>
+                <button onclick="location.href='/Account/Auth'">Корзина</button>
+                <button onclick="location.href='/Account/Auth'">Мои заказы</button>
+                <button onclick="location.href='/Account/Auth'">Войти</button>
+            }
+            else if (currentUser.IsAdmin)
+            {
+                <button onclick="location.href='/Admin'">
+                    Админ-панель
+                </button>
 
-                    Избранное
-
+                <button onclick="location.href='/Profile'">
+                    Профиль
                 </button>
             }
             else
             {
                 <button onclick="location.href='/Favorite/Index'">
-
                     Избранное
-
                 </button>
-            }
-            @if (Context.Session.GetInt32("UserId") == null)
-            {
-                <button onclick="location.href='/Account/Auth'">
 
-                    Корзина
-
-                </button>
-            }
-            else
-            {
                 <button onclick="location.href='/Basket/Index'">
                     Корзина
-                    </button>
-            }
-            @if (Context.Session.GetInt32("UserId") == null)
-            {
-                <button onclick="location.href='/Account/Auth'">
-
-                    Мои заказы
-
                 </button>
-            }
-            else
-            {
+
                 <button onclick="location.href='/Order'">
-
                     Мои заказы
+                </button>
 
-                </button>
-            }
-            @if (Context.Session.GetInt32("UserId") == null)
-            {
-                <button onclick="location.href='/Account/Auth'">
-                    Войти
-                </button>
-            }
-            else
-            {
                 <button onclick="location.href='/Profile'">
                     Профиль
                 </button>
             }
+
         </div>
     </header>
 

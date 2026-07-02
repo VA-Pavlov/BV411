@@ -58,7 +58,32 @@ namespace BV411.Controllers
 
             return RedirectToAction("Index", "Product");
         }
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult ForgotPassword(string login, string newPassword)
+        {
+            var user = UserRepos.Users.FirstOrDefault(x => x.Login == login);
+
+            if (user == null)
+            {
+                ViewBag.Error = "Пользователь не найден";
+                return View();
+            }
+
+            user.Password = newPassword;
+
+            ViewBag.Success = "Пароль успешно изменён.";
+
+            return View();
+        }
+        public IActionResult Forgot()
+        {
+            return View();
+        }
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

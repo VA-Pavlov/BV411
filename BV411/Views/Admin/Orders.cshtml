@@ -1,0 +1,43 @@
+﻿@model List<Order>
+@using BV411.Models
+
+<link rel="stylesheet" href="~/css/OrderSite.css">
+
+<h1>Все заказы</h1>
+
+@if (!Model.Any())
+{
+    <h3>Заказов пока нет.</h3>
+}
+else
+{
+    <div class="products">
+
+        @foreach (var order in Model)
+        {
+            <div class="card">
+
+                <h3>Заказ №@order.Id</h3>
+
+                <p>Пользователь: @order.UserId</p>
+
+                <p>Дата: @order.CreatedAt</p>
+
+                <p>Товаров: @order.Items.Sum(x => x.Quantity)</p>
+
+                <p>Сумма: @order.TotalPrice.ToString("N0") ₽</p>
+
+                <p>Статус: @order.Status</p>
+
+                <a class="buy-btn"
+                   asp-controller="Order"
+                   asp-action="Details"
+                   asp-route-id="@order.Id">
+                    Подробнее
+                </a>
+
+            </div>
+        }
+
+    </div>
+}

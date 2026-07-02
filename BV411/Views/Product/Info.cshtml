@@ -3,70 +3,83 @@
 @using BV411.Models
 
 @{
-    int? userId = Context.Session.GetInt32("UserId");
+	int? userId = Context.Session.GetInt32("UserId");
 
-    Favorite favorite = new Favorite();
+	User? user = null;
+	Favorite favorite = new Favorite();
 
-    if (userId != null)
-    {
-        favorite = FavoriteRepos.GetFavorite(userId.Value);
-    }
+	if (userId != null)
+	{
+		user = UserRepos.Get(userId.Value);
+		favorite = FavoriteRepos.GetFavorite(userId.Value);
+	}
 
-    bool isFavorite = favorite.Products.Any(x => x.Id == Model.Id);
+	bool isFavorite = favorite.Products.Any(x => x.Id == Model.Id);
 }
 <div class="product-page">
 
-    <div class="product-photo">
-        Фото товара
-    </div>
+	<div class="product-photo">
+		Фото товара
+	</div>
 
-    <div class="product-info">
+	<div class="product-info">
 
-        @if (userId == null)
-        {
-            <button class="product-favorite"
-                    onclick="location.href='/Account/Auth'">
-                ☆
-            </button>
-        }
-        else
-        {
-            <button class="product-favorite @(isFavorite ? "active" : "")"
-                    onclick="location.href='/Favorite/Toggle?id=@Model.Id'">
-                @(isFavorite ? "★" : "☆")
-            </button>
-        }
+		@if (userId == null)
+		{
+			<button class="product-favorite"
+					onclick="location.href='/Account/Auth'">
+				☆
+			</button>
+		}
+		else
+		{
+			<button class="product-favorite @(isFavorite ? "active" : "")"
+					onclick="location.href='/Favorite/Toggle?id=@Model.Id'">
+				@(isFavorite ? "★" : "☆")
+			</button>
+		}
 
-        <h1>@Model.Name</h1>
+		<h1>@Model.Name</h1>
 
-        <p class="product-price">
-            @Model.Price.ToString("N0") ₽ ₽
-        </p>
+		<p class="product-price">
+			@Model.Price.ToString("N0") ₽ ₽
+		</p>
 
-        <p class="product-description">
-            @Model.Description
-        </p>
+		<p class="product-description">
+			@Model.Description
+		</p>
 
-        <div class="product-buttons">
+		<div class="product-buttons">
 
-            <button class="buy-btn"
-                    onclick="location.href='/Basket/Add?id=@Model.Id'">
-                Добавить в корзину
-            </button>
+			@if (user == null || !user.IsAdmin)
+			{
+				<button class="buy-btn"
+						onclick="location.href='/Basket/Add?basketId=0&id=@Model.Id'">
+					Добавить в корзину
+				</button>
 
-            <button class="buy-btn"
-                    onclick="location.href='/Order/BuyNow?id=@Model.Id'">
-                Купить сейчас
-            </button>
+				<button class="buy-btn"
+						onclick="location.href='/Order/BuyNow?id=@Model.Id'">
+					Купить сейчас
+				</button>
+			}
 
-            <a asp-controller="Product"
-               asp-action="Index"
-               class="back-btn">
-                Вернуться к покупкам
-            </a>
+			@if (user != null && user.IsAdmin)
+			{
+				<button class="buy-btn"
+						onclick="location.href='/Admin/EditProduct/@Model.Id'">
+					Редактировать товар
+				</button>
+			}
 
-        </div>
+			<a asp-controller="Product"
+			   asp-action="Index"
+			   class="back-btn">
+				Вернуться к покупкам
+			</a>
 
-    </div>
+		</div>
+
+	</div>
 
 </div>
